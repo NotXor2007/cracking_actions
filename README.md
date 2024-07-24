@@ -1,5 +1,5 @@
 # cracking-actions
-## cracking-actions is an open source software that allows you to crack passwords, files, etc... also it's available on windows and linux(coming soon)
+## cracking-actions is an open source software that allows you to crack passwords, files, etc... also it's available on windows and linux
 ## To Do
 
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
