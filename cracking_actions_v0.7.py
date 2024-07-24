@@ -1,7 +1,7 @@
 #a password cracker by adam naanaa
 #finished in 05/07/2024 at 7:44PM  
 #importing libraries
-import sys, os
+import sys, os, platform
 import colorama
 from colorama import Fore
 import tkinter as tk
@@ -267,7 +267,10 @@ class Cli:
 		elif cmd.lower() == "run" and Cli.ATKTYPE == 2:
 			self.__runzipatk(S)
 		elif cmd.lower() == "clear":
-			os.system("cls")
+			if platform.system() == "Windows":
+				os.system("cls")
+			elif platform.system() == "Linux":
+				os.system("clear")
 		elif cmd.lower() == "gcp":
 			self.__get_page()
 		elif cmd.lower().strip() == "":
