@@ -18,6 +18,7 @@ from man import Manual
 
 #not supported on windows xp------
 cdate = "©ADAM-TECH 10/07/2024"
+icon = ".\\icon\\cracking-actions-icon.ico"
 #f""
 #---------------------------------
 
@@ -31,6 +32,7 @@ class Window:
 		self.window = tk.Tk()
 		self.window.title(title)
 		self.window.configure(background="#"+self.bg)
+		self.window.iconbitmap(icon)
 		self.window.resizable(False, False)
 		self.window.wm_attributes("-topmost", True)
 		self.window.geometry(f"{self.w}x{self.h}")
@@ -85,6 +87,7 @@ class Window:
 		help_window.resizable(False, True)
 		help_window.geometry("870x400")
 		help_window.configure(bg=windowc)
+		help_window.iconbitmap(icon)
 		help_window.wm_attributes("-alpha", 0.85)
 		help_window.title("cracking actions v0.7-help")
 		scroll = scrolledtext.ScrolledText(help_window,width=950,
@@ -111,6 +114,7 @@ class Window:
 		about_window.resizable(False, False)
 		about_window.geometry("600x160")
 		about_window.configure(bg=windowc)
+		about_window.iconbitmap(icon)
 		about_window.title("cracking actions v0.7-About")
 		tk.Label(about_window, text="cracking actions v0.7",
 			background=windowc,foreground="#ffff88", font="Times 25 bold").pack()
