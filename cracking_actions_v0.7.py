@@ -332,4 +332,4 @@ if __name__ == "__main__":
 	elif check_cli():
 		Cli("cracking actions v0.7", commands_list, available_types)
 	else:
-		Window(653,575,"cracking actions v0.7","555555", commands_list, available_types)
+		Window(656,622,"cracking actions v0.7","555555", commands_list, available_types)
