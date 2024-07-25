@@ -4,10 +4,10 @@
 
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
 - [ ] adding rar cracker
-- [ ] adding website enumeration tool
-- [ ] adding wifi cracker tool
 - [ ] adding wordlist support
 - [ ] adding settings menu
+- [ ] adding website enumeration tool
+- [ ] adding wifi cracker tool
 - [ ] adding AES-256 encryption method support
 
 ## Done
