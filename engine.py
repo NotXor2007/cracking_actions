@@ -93,14 +93,14 @@ class Start:
 			return
 		if len(hashed_key.strip()) == 0:
 			if not cli:
-				self.win.out.pwsdout.insert("end","Warning:wrong hash key\n")
+				self.win.out.pswdout.insert("end","Warning:wrong hash key\n")
 			else:
 				print(Fore.WHITE + "Warning:wrong hash key")
 			Start.STOPPSWD = True
 			return False
 		elif not length_key.strip().isnumeric():
 			if not cli:
-				self.win.out.pwsdout.insert("end","Warning:Mgl must be a number!\n")
+				self.win.out.pswdout.insert("end","Warning:Mgl must be a number!\n")
 			else:
 				print(Fore.WHITE + "Warning:Mgl must be a number!")
 			Start.STOPPSWD = True
