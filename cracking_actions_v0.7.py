@@ -16,7 +16,10 @@ from widgets.zipatk import AttackZip
 from widgets.output import OutputTerm
 from man import Manual
 
+#not supported on windows xp------
 cdate = "©ADAM-TECH 10/07/2024"
+#f""
+#---------------------------------
 
 class Window:
 
@@ -146,11 +149,13 @@ class Cli:
 		S = Start(self)
 		Start.STOPPSWD = False
 		Start.STOPZIP = False
+		#not supported on windows xp-----------
 		print(Fore.RED + " ▄▄· ▄▄▄   ▄▄▄·  ▄▄· ▄ •▄ ▪   ▐ ▄  ▄▄ •      ▄▄▄·  ▄▄· ▄▄▄▄▄▪         ▐ ▄ .▄▄ ·") 
 		print("▐█ ▌▪▀▄ █·▐█ ▀█ ▐█ ▌▪█▌▄▌▪██ •█▌▐█▐█ ▀ ▪    ▐█ ▀█ ▐█ ▌▪•██  ██ ▪     •█▌▐█▐█ ▀.") 
 		print("██ ▄▄▐▀▀▄ ▄█▀▀█ ██ ▄▄▐▀▀▄·▐█·▐█▐▐▌▄█ ▀█▄    ▄█▀▀█ ██ ▄▄ ▐█.▪▐█· ▄█▀▄ ▐█▐▐▌▄▀▀▀█▄")
 		print("▐███▌▐█•█▌▐█ ▪▐▌▐███▌▐█.█▌▐█▌██▐█▌▐█▄▪▐█    ▐█ ▪▐▌▐███▌ ▐█▌·▐█▌▐█▌.▐▌██▐█▌▐█▄▪▐█")
 		print("·▀▀▀ .▀  ▀ ▀  ▀ ·▀▀▀ ·▀  ▀▀▀▀▀▀ █▪·▀▀▀▀      ▀  ▀ ·▀▀▀  ▀▀▀ ▀▀▀ ▀█▄▀▪▀▀ █▪ ▀▀▀▀ ")
+                #--------------------------------------
 		print(Fore.GREEN + "----------"+title+"----------")
 		print("a software that allows you to crack password, files etc...")
 		print("---developped and published by adam naanaa---")
@@ -168,7 +173,8 @@ class Cli:
 
 	def __runpswdatk(self, S):
 		Start.STOPPSWD = False
-		cmd = input(Fore.BLUE + "Command:")
+		print(Fore.BLUE, end = "")
+		cmd = input("Command:")
 		algo = input("Algorithm:")
 		hashedkey = input("Hash:")
 		mgl = input("Mgl:")	
@@ -177,7 +183,8 @@ class Cli:
 
 	def __runzipatk(self, S):
 		Start.STOPZIP = False
-		cmd = input(Fore.BLUE + "Command:")
+		print(Fore.BLUE, end = "")
+		cmd = input("Command:")
 		mgl = input("Mgl:")
 		fpath = input("file path:")
 		opath = input("output path:")
@@ -238,11 +245,14 @@ class Cli:
 
 	def __execute(self, S):
 		if Cli.ATKTYPE == 0:
-			cmd = input(Fore.GREEN + "==>")
+                        print(Fore.GREEN, end = "")
+                        cmd = input("==>")
 		elif Cli.ATKTYPE == 1:
-			cmd = input(Fore.GREEN + "==>pswdattack==>")
+                        print(Fore.GREEN, end = "")
+                        cmd = input("==>pswdattack==>")
 		elif Cli.ATKTYPE == 2:
-			cmd = input(Fore.GREEN + "==>zipattack==>")
+                        print(Fore.GREEN, end = "")
+                        cmd = input("==>zipattack==>")
 		if cmd.lower() == "help":
 			self.__help()
 		elif cmd.lower() == "pswdattack":
@@ -272,7 +282,8 @@ class Cli:
 			elif platform.system() == "Linux":
 				os.system("clear")
 		elif cmd.lower() == "gcp":
-			self.__get_page()
+                        print(Fore.WHITE, end = "")
+                        self.__get_page()
 		elif cmd.lower().strip() == "":
 			pass
 		elif cmd.lower() == "exit" or cmd.lower() == "quit":
