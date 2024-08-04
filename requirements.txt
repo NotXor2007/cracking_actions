@@ -1,1 +1,4 @@
 colorama
+rarfile
+zipfile-deflate64 
+backports.lzma
