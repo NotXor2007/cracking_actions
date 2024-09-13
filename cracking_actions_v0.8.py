@@ -41,6 +41,7 @@ class Window:
 		self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
 		self.__menu()
 		self.__wsetup(commands_list, types_list, S)
+		self.__shell_enabler()
 		self.pswdatk()
 		self.__draw()
 		self.update()
@@ -78,6 +79,9 @@ class Window:
 		self.zipattack.pack()
 		self.rarattack.pack()
 		self.out.pack()
+	#basically makes the shell works
+	def __shell_enabler(self):
+		shell = Shell(self)
 
 	def __draw(self):
 		#draw gui frame
@@ -248,10 +252,12 @@ class Cli:
 			print("main commands:")
 			print("++++pswdattack ==> switch password cracker page(hash only!)++++")
 			print("++++zipattack ==> switch to zip cracker page++++")
+			print("++++rarattack ==> switch to rar cracker page++++")
 
 		elif Cli.ATKTYPE == 1:
 			print("pswdattack commands:")
 			print("++++zipattack ==> switch to zip cracker page++++")
+			print("++++rarattack ==> switch rar cracker page++++")
 			print("++++main ==> switch to main page++++")
 			print("password attacker:") 
 			print("++++commands++++")
@@ -267,6 +273,7 @@ class Cli:
 		elif Cli.ATKTYPE == 2:
 			print("zipattack commands:")
 			print("++++pswdattack ==> switch password cracker page(hash only!)++++")
+			print("++++rarattack ==> switch rar cracker page++++")
 			print("++++main ==> switch to main page++++")
 			print("zip attacker:") 
 			print("++++commands++++")
@@ -278,17 +285,37 @@ class Cli:
 			print("++++----provide path to the zip file----++++")
 			print("++++output++++")
 			print("++++----provide path to the extracted data----++++")
+		elif Cli.ATKTYPE == 3:
+			print("rarattack commands:")
+			print("++++pswdattack ==> switch password cracker page(hash only!)++++")
+			print("++++zipattack ==> switch to zip cracker page++++")
+			print("++++main ==> switch to main page++++")
+			print("rar attacker:") 
+			print("++++commands++++")
+			for _ in commands_list_man:
+				print("++++-----"+_+"-----++++")
+			print("++++Mgl++++")
+			print("++++----maximum generated length----++++")
+			print("++++path++++")
+			print("++++----provide path to the zip file----++++")
+			print("++++output++++")
+			print("++++----provide path to the extracted data----++++")
 
 	def __execute(self, S):
+		#check for selected attacker
 		if Cli.ATKTYPE == 0:
-                        print(Fore.GREEN, end = "")
-                        cmd = input("==>")
+			print(Fore.GREEN, end = "")
+			cmd = input("==>")
 		elif Cli.ATKTYPE == 1:
-                        print(Fore.GREEN, end = "")
-                        cmd = input("==>pswdattack==>")
+			print(Fore.GREEN, end = "")
+			cmd = input("==>pswdattack==>")
 		elif Cli.ATKTYPE == 2:
-                        print(Fore.GREEN, end = "")
-                        cmd = input("==>zipattack==>")
+			print(Fore.GREEN, end = "")
+			cmd = input("==>zipattack==>")
+		elif Cli.ATKTYPE == 3:
+			print(Fore.GREEN, end = "")
+			cmd = input("==>rarattack==>")
+
 		if cmd.lower() == "help":
 			self.__help()
 		elif cmd.lower() == "pswdattack":
@@ -301,6 +328,12 @@ class Cli:
 			if not Cli.ATKTYPE == 2:
 				print(Fore.WHITE + "welcome to zip cracker")
 				Cli.ATKTYPE = 2
+			else:
+				self.__not_available()
+		elif cmd.lower() == "rarattack":
+			if not Cli.ATKTYPE == 3:
+				print(Fore.WHITE + "welcome to rar cracker")
+				Cli.ATKTYPE = 3
 			else:
 				self.__not_available()
 		elif cmd.lower() == "main":

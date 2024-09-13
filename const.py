@@ -1,4 +1,5 @@
 import string
+import rarfile
 
 rarfile.UNRAR_TOOL = ".\\unrar.exe"
 
