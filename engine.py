@@ -5,8 +5,6 @@ from const import*
 from itertools import product
 from colorama import Fore
 
-rarfile.UNRAR_TOOL = ".\\unrar.exe"
-
 #start contains cracking alghoritms
 class Start:
 	STOPPSWD, STOPZIP, STOPRAR = True, True, True

@@ -1,5 +1,7 @@
 import string
 
+rarfile.UNRAR_TOOL = ".\\unrar.exe"
+
 available_types = ["md5","sha1","sha224","sha384","sha3_224","sha3_512","sha3_384","sha3_256","sha256","sha512","blake2b","blake2s"]
 
 char_options = (string.digits,string.ascii_lowercase,string.ascii_uppercase

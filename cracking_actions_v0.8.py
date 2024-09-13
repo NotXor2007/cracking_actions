@@ -15,6 +15,7 @@ from widgets.pswdatk import AttackPswd
 from widgets.zipatk import AttackZip
 from widgets.raratk import AttackRar
 from widgets.output import OutputTerm
+from widgets.shell import Shell
 from man import Manual
 
 #not supported on windows xp------
