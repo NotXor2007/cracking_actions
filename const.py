@@ -1,9 +1,12 @@
 import string
 import rarfile
+import ctypes
 
 rarfile.UNRAR_TOOL = ".\\core\\unrar.exe"
 icon = ".\\icon\\cracking-actions-icon.ico"
 cdate = "©ADAM-TECH 12/09/2024"
+sc_width = ctypes.windll.user32.GetSystemMetrics(0)
+sc_height = ctypes.windll.user32.GetSystemMetrics(1)
 
 available_types = ["md5","sha1","sha224","sha384","sha3_224","sha3_512","sha3_384","sha3_256","sha256","sha512","blake2b","blake2s"]
 

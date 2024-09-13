@@ -1,7 +1,7 @@
 #a password cracker by adam naanaa
 #finished in 
 #importing libraries
-import sys, os, platform, ctypes
+import sys, os, platform
 import colorama
 from colorama import Fore
 import tkinter as tk
@@ -35,13 +35,15 @@ class Window:
 		self.window.iconbitmap(icon)
 		self.window.resizable(False, False)
 		self.window.wm_attributes("-topmost", False)
-		self.window.geometry(f"{self.w}x{self.h}")
+		self.redraw()
+		self.window.geometry(f"{self.w}x{self.h}+0+0")
 		self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
 		self.__menu()
 		self.__wsetup(commands_list, types_list, S)
 		self.__shell_enabler()
 		self.pswdatk()
 		self.__draw()
+		self.window.geometry(f"+{sc_width//2-self.w//2}+{sc_height//2-self.h//2}")
 		self.update()
 
 	def __wsetup(self, commands_list, types_list, S):
@@ -171,7 +173,7 @@ class Window:
 	def settings(self):
 		self.wsettings.show_settings()
 
-	def readraw(self):
+	def redraw(self):
 		self.window.update_idletasks()
 
 	def Aupdate(self):
