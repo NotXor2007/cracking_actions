@@ -1,10 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from const import*
+from supercls import Widgets
+from tkinter import colorchooser
 
-class Settings:
+class Settings(Widgets):
 
-	def __init__(self, win):
+	def __init__(self, win, window):
+		Widgets.__init__(self, window)
 		self.win = win
 		self.settings_window = None
 		self.language_selector = None
@@ -36,6 +39,9 @@ class Settings:
 		self.language_selector["values"] = language_list
 		self.language_selector.set(self.language_selector["values"][0])
 
+	def __get_selection(self):
+		self.language_selector.get()
+
 	def __apply(self):
 		self.apply = tk.Button(self.apply_frame, text = "Apply", command = None)
 
@@ -44,8 +50,8 @@ class Settings:
 		self.__apply()
 	
 	def __pack(self):
-		self.language_frame.pack()
+		self.language_frame.place(relx = 0, rely = 0)
 		self.language_selector.pack()
-		self.apply_frame.pack()
+		self.apply_frame.place(relx = 0.85, rely = 0.88)
 		self.apply.pack()
 	

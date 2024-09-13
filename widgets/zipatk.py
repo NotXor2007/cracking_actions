@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from supercls import Widgets
-from engine import*
+from core.engine import*
 import threading
 from const import*
 from tkinter import messagebox

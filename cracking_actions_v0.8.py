@@ -9,7 +9,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from tkinter import scrolledtext
 from const import*
-from engine import*
+from core.engine import*
 from widgets.settings import Settings
 from widgets.menu import MenuBar
 from widgets.pswdatk import AttackPswd 
@@ -25,11 +25,11 @@ class Window:
 
 	def __init__(self, w, h, title, bg, commands_list, types_list):
 		S = Start(self)
-		self.wsettings = Settings(self)
 		self.w, self.h = w, h
 		self.title = title
 		self.bg = bg
 		self.window = tk.Tk()
+		self.wsettings = Settings(self, self.window)
 		self.window.title(title)
 		self.window.configure(background="#"+self.bg)
 		self.window.iconbitmap(icon)

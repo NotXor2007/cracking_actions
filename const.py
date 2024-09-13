@@ -1,7 +1,7 @@
 import string
 import rarfile
 
-rarfile.UNRAR_TOOL = ".\\unrar.exe"
+rarfile.UNRAR_TOOL = ".\\core\\unrar.exe"
 icon = ".\\icon\\cracking-actions-icon.ico"
 cdate = "©ADAM-TECH 12/09/2024"
 
