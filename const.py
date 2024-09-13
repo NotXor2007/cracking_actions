@@ -2,6 +2,8 @@ import string
 import rarfile
 
 rarfile.UNRAR_TOOL = ".\\unrar.exe"
+icon = ".\\icon\\cracking-actions-icon.ico"
+cdate = "©ADAM-TECH 12/09/2024"
 
 available_types = ["md5","sha1","sha224","sha384","sha3_224","sha3_512","sha3_384","sha3_256","sha256","sha512","blake2b","blake2s"]
 
@@ -63,3 +65,5 @@ commands_list_man = ("start -n: to use password cracker only for numbers",
 "start -sp -s -cu -n: to use it for both numbers,uppercase letters and special char with space", 
 "start -sp -s -cu -cl:to use it for both lowercase and uppercase and special char with space", 
 "start -sp -s -cu -cl -n: to use it for all and special char with space")
+
+language_list = ("English", "French", "Arabic")

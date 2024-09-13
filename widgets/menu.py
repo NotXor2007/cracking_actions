@@ -48,5 +48,5 @@ class MenuBar:
 			command = self.raratk)
 
 	def __settings_e(self):
-		self.menu_bar.add_command(label="settings", 
+		self.menu_bar.add_command(label="Settings", 
 			command = self.settings)

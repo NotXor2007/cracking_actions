@@ -1,7 +1,7 @@
 #a password cracker by adam naanaa
 #finished in 
 #importing libraries
-import sys, os, platform
+import sys, os, platform, ctypes
 import colorama
 from colorama import Fore
 import tkinter as tk
@@ -10,6 +10,7 @@ from tkinter import messagebox
 from tkinter import scrolledtext
 from const import*
 from engine import*
+from widgets.settings import Settings
 from widgets.menu import MenuBar
 from widgets.pswdatk import AttackPswd 
 from widgets.zipatk import AttackZip
@@ -18,16 +19,13 @@ from widgets.output import OutputTerm
 from widgets.shell import Shell
 from man import Manual
 
-#not supported on windows xp------
-cdate = "©ADAM-TECH 12/09/2024"
-icon = ".\\icon\\cracking-actions-icon.ico"
-#f""
-#---------------------------------
+#f"" not supported on windows xp------
 
 class Window:
 
 	def __init__(self, w, h, title, bg, commands_list, types_list):
 		S = Start(self)
+		self.wsettings = Settings(self)
 		self.w, self.h = w, h
 		self.title = title
 		self.bg = bg
@@ -171,7 +169,7 @@ class Window:
 			child.configure(state="active")
 
 	def settings(self):
-		pass #TODO
+		self.wsettings.show_settings()
 
 	def readraw(self):
 		self.window.update_idletasks()
