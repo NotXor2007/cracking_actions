@@ -1,2 +1,3 @@
-_pycache_
+__pycache__
+./widgets/__pycache__
 venv
