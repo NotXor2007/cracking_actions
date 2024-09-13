@@ -30,7 +30,7 @@ class AttackZip(Widgets):
 		self.file_path = filedialog.askopenfilename(title="select a zipfile",
 			filetypes=[("zipfile", ".zip")])
 		if not self.file_path == "":
-			self.FileOutE.delete(0, tk.END)
+			self.FileIE.delete(0, tk.END)
 			self.FileIE.insert(tk.END, self.file_path)
 
 	def __pathOut(self):

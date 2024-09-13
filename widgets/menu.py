@@ -2,12 +2,13 @@ import tkinter as tk
 
 class MenuBar:
 
-	def __init__(self, window, on_closing, get_help, pswdatk, zipatk, mwin):
+	def __init__(self, window, on_closing, get_help, pswdatk, zipatk, raratk, mwin):
 		self.menu_bar = tk.Menu(window)
 		self.on_closing = on_closing
 		self.get_help = get_help
 		self.pswdatk = pswdatk
 		self.zipatk = zipatk
+		self.raratk = raratk
 		self.mwin = mwin
 		self.__exit()
 		self.__help()
@@ -15,10 +16,12 @@ class MenuBar:
 		window.configure(menu = self.menu_bar)
 		self.pswdatk_menu = tk.Menu(self.menu_bar, tearoff=False)
 		self.zipatk_menu = tk.Menu(self.menu_bar, tearoff=False)
+		self.raratk_menu = tk.Menu(self.menu_bar, tearoff=False)
 		self.menu_bar.add_cascade(label="attackers", 
 			menu=self.pswdatk_menu)
 		self.__attack_pswd_e()
 		self.__attak_zip_e()
+		self.__attak_rar_e()
 
 	def __exit(self):
 		self.menu_bar.add_command(label="exit", command = self.on_closing)
@@ -36,3 +39,7 @@ class MenuBar:
 	def __attak_zip_e(self):
 		self.pswdatk_menu.add_command(label="enable zip attacker", 
 			command = self.zipatk)
+
+	def __attak_rar_e(self):
+		self.pswdatk_menu.add_command(label="enable rar attacker", 
+			command = self.raratk)

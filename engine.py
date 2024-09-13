@@ -1,13 +1,15 @@
 import os
 import hashlib
-import zipfile
+import zipfile, rarfile
 from const import*
 from itertools import product
 from colorama import Fore
 
+rarfile.UNRAR_TOOL = ".\\unrar.exe"
+
 #start contains cracking alghoritms
 class Start:
-	STOPPSWD,STOPZIP = True,True
+	STOPPSWD, STOPZIP, STOPRAR = True, True, True
 	def __init__(self, win):
 		self.win = win
 
@@ -70,12 +72,12 @@ class Start:
 				print(Fore.RED + f"the current hash is {new_hash}")
 				print(Fore.RED + f"the hash value of the key is {hashed_key}")
 
-	def __printcompressed(self,key,file,cli):
+	def __printcompressed(self, cracker, key, file, cli):
 		if not cli:
-			self.win.out.zipout.delete("1.0", "end")
-			self.win.out.zipout.insert("end","cracking process started!\n")
-			self.win.out.zipout.insert("end",f"the file path is {file}\n")
-			self.win.out.zipout.insert("end",f"the current key is {key}\n")
+			cracker.delete("1.0", "end")
+			cracker.insert("end","cracker process started!\n")
+			cracker.insert("end",f"the file path is {file}\n")
+			cracker.insert("end",f"the current key is {key}\n")
 		else:
 			os.system("cls")
 			print("cracking process started!")
@@ -128,9 +130,6 @@ class Start:
 			print(Fore.WHITE + "key not found!")
 		Start.STOPPSWD = True
 
-	def __attackZipExist(self, file, output):
-		pass
-
 	def attackZip(self, file, output, length_key, option, cli=False):
 		result = 0
 		if option == None and cli:
@@ -152,7 +151,7 @@ class Start:
 				key = "".join(keys)
 				try:
 					f = zipfile.ZipFile(file)
-					self.__printcompressed(key, file, cli)
+					self.__printcompressed(self.win.out.zipout, key, file, cli)
 					try:
 						f.setpassword(pwd=key.encode())
 						f.extractall(output)
@@ -169,6 +168,12 @@ class Start:
 						self.win.out.zipout.insert("end","Warning:incorrect file name or path!\n")
 					else:
 						print("Warning:incorrect file name or path!")
+					continue #this is crucial
+				#exit if key was found
+				if result == 1:
+					Start.STOPZIP = True
+					return
+				else:
 					continue
 				if not cli:
 					self.win.out.zipout.insert("end","current key is "+key)
@@ -176,13 +181,65 @@ class Start:
 					self.win.Aupdate()
 				else:
 					print("current key is "+key)
-				if result == 1:
-					Start.STOPZIP = True
-					return
-				else:
-					continue
 		if not cli:
 			self.win.out.zipout.insert("end","key not found!\n")
 		else:
 			print("key not found!")
 		Start.STOPZIP = True
+
+	def attackRar(self, file, output, length_key, option, cli=False):
+		result = 0
+		if option == None and cli:
+			Start.STOPRAR = True
+			print("Warning:wrong command")
+			return
+		elif not length_key.strip().isnumeric():
+			if not cli:
+				self.win.out.zipout.insert("end","Warning:Mgl must be a number!\n")
+			else:
+				print("Warning:Mgl must be a number!")
+			Start.STOPRAR = True
+			return False
+		length_key = int(length_key.strip())
+		for length in range(length_key+1):
+			for keys in product(option,repeat = length):
+				if Start.STOPRAR:
+					return
+				key = "".join(keys)
+				try:
+					f = rarfile.RarFile(file)
+					self.__printcompressed(self.win.out.rarout, key, file, cli)
+					try:
+						f.setpassword(pwd=key.encode())
+						f.extractall(output)
+						f.close()
+						if not cli:
+							self.win.out.rarout.insert("end",f"key found:{key}\n")
+						else:
+							print(f"key found:{key}")
+						result = 1
+					except RuntimeError as e:
+						continue
+				except Exception as e:
+					if not cli:
+						self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
+					else:
+						print("Warning:incorrect file name or path!")
+					continue #this is crucial
+				#exit if key was found
+				if result == 1:
+					Start.STOPRAR = True
+					return
+				else:
+					continue
+				if not cli:
+					self.win.out.rarout.insert("end","current key is "+key)
+					self.win.readraw()
+					self.win.Aupdate()
+				else:
+					print("current key is "+key)
+		if not cli:
+			self.win.out.rarout.insert("end","key not found!\n")
+		else:
+			print("key not found!")
+		Start.STOPRAR = True
