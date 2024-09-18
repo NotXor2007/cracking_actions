@@ -18,18 +18,20 @@ from widgets.raratk import AttackRar
 from widgets.output import OutputTerm
 from widgets.shell import Shell
 from man import Manual
+from core import cfghandler
 
 #f"" not supported on windows xp------
 
 class Window:
 
-	def __init__(self, w, h, title, bg, commands_list, types_list):
+	def __init__(self, w, h, title, bg, commands_list, types_list, language):
 		S = Start(self)
 		self.w, self.h = w, h
 		self.title = title
 		self.bg = bg
+		self.language = language
 		self.window = tk.Tk()
-		self.wsettings = Settings(self, self.window)
+		self.wsettings = Settings(self, self.window, self.language)
 		self.window.title(title)
 		self.window.configure(background="#"+self.bg)
 		self.window.iconbitmap(icon)
@@ -91,11 +93,11 @@ class Window:
 		self.out.frame.grid(row=1, column=0, columnspan=3, sticky="sew")
 	#create menu
 	def __menu(self):
-		menu = MenuBar(self.window, self.on_closing, self.get_help, 
+		menu = MenuBar(self, self.window, self.on_closing, self.get_help, 
 			self.pswdatk, self.zipatk, self.raratk, self.settings, self.mwin)
 
 	def on_closing(self):
-		result = messagebox.askokcancel("Are you sure?", "Do you want to close cracking actions v0.8")
+		result = messagebox.askokcancel(self.language[9], self.language[10])
 		if result:
 			sys.exit(0)
 		else:
@@ -136,15 +138,15 @@ class Window:
 		about_window.geometry("600x160")
 		about_window.configure(bg=windowc)
 		about_window.iconbitmap(icon)
-		about_window.title("cracking actions v0.8-About")
+		about_window.title(self.language[11])
 		tk.Label(about_window, text="cracking actions v0.8",
 			background=windowc,foreground="#ffff88", font="Times 25 bold").pack()
-		tk.Label(about_window, text="a software that allows you to crack password, files etc...",
-			background=windowc,foreground="#AABBFF", font="Helvetica 15 bold").pack()
-		tk.Label(about_window, text="developped and published by adam naanaa",
+		tk.Label(about_window, text=self.language[12],
+			background=windowc,foreground="#AABBFF", font="Helvetica 13 bold").pack()
+		tk.Label(about_window, text=self.language[13],
 			background=windowc,foreground="#AABBFF", font="Helvetica 15 bold").pack()
 		tk.Label(about_window, text=cdate,
-			background=windowc,foreground="#AA55AA", font="Times 20 bold").pack()	
+			background=windowc,foreground="#AA55AA", font="Times 13 bold").pack()	
 	#creating menu events
 	def pswdatk(self):
 		for child in self.zipattack.frame.winfo_children():
@@ -392,9 +394,13 @@ def check_man():
 	return False
 
 if __name__ == "__main__":
+	if not os.path.exists(".\\settings.cfg"):
+		pass #TODO:Run AutoCreator.exe
+	else:
+		language = cfghandler.readcfg()
 	if check_man():
 		Manual("cracking actions v0.8", commands_list, available_types)
 	elif check_cli():
 		Cli("cracking actions v0.8", commands_list, available_types)
 	else:
-		Window(840,622,"cracking actions v0.8","555555", commands_list, available_types)
+		Window(840,622,"cracking actions v0.8","555555", commands_list, available_types, language)

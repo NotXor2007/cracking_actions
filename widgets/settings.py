@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 from const import*
+from core import cfghandler
 from supercls import Widgets
 from tkinter import colorchooser
 
 class Settings(Widgets):
 
-	def __init__(self, win, window):
+	def __init__(self, win, window, language):
 		Widgets.__init__(self, window)
 		self.win = win
 		self.settings_window = None
@@ -14,6 +15,7 @@ class Settings(Widgets):
 		self.language_frame = None
 		self.apply_frame = None
 		self.apply = None
+		self.language = language
 
 	def show_settings(self):
 		self.__window()
@@ -37,17 +39,25 @@ class Settings(Widgets):
 	def __language(self):
 		self.language_selector = ttk.Combobox(self.language_frame)
 		self.language_selector["values"] = language_list
-		self.language_selector.set(self.language_selector["values"][0])
+		self.language_selector.set(self.language[0])
 
 	def __get_selection(self):
-		self.language_selector.get()
+		return self.language_selector.get()
 
 	def __apply(self):
-		self.apply = tk.Button(self.apply_frame, text = "Apply", command = None)
+		if self.__get_selection() == "English":
+			cfghandler.writecfg(["LANGUAGE=.\lang\english.lang"])
+		elif self.__get_selection() == "French":
+			cfghandler.writecfg(["LANGUAGE=.\lang\\french.lang"])
+		elif self.__get_selection() == "Arabic":
+			cfghandler.writecfg(["LANGUAGE=.\lang\\arabic.lang"])
+
+	def __applybtn(self):
+		self.apply = tk.Button(self.apply_frame, text = "Apply", command = self.__apply)
 
 	def __widgets(self):
 		self.__language()
-		self.__apply()
+		self.__applybtn()
 	
 	def __pack(self):
 		self.language_frame.place(relx = 0, rely = 0)

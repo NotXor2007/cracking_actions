@@ -2,7 +2,7 @@ import tkinter as tk
 
 class MenuBar:
 
-	def __init__(self, window, on_closing, get_help, pswdatk, zipatk, raratk, settings, mwin):
+	def __init__(self, win, window, on_closing, get_help, pswdatk, zipatk, raratk, settings, mwin):
 		self.menu_bar = tk.Menu(window)
 		self.on_closing = on_closing
 		self.get_help = get_help
@@ -11,6 +11,7 @@ class MenuBar:
 		self.raratk = raratk
 		self.settings = settings
 		self.mwin = mwin
+		self.language = win.language
 		self.__exit()
 		self.__help()
 		self.__about()
@@ -19,7 +20,7 @@ class MenuBar:
 		self.zipatk_menu = tk.Menu(self.menu_bar, tearoff=False)
 		self.raratk_menu = tk.Menu(self.menu_bar, tearoff=False)
 		self.settings_menu = tk.Menu(self.menu_bar, tearoff=False)
-		self.menu_bar.add_cascade(label="attackers", 
+		self.menu_bar.add_cascade(label=self.language[4], 
 			menu=self.pswdatk_menu)
 		self.__attack_pswd_e()
 		self.__attak_zip_e()
@@ -27,26 +28,26 @@ class MenuBar:
 		self.__settings_e()
 	#creating menus and calling events
 	def __exit(self):
-		self.menu_bar.add_command(label="exit", command = self.on_closing)
+		self.menu_bar.add_command(label=self.language[1], command = self.on_closing)
 
 	def __help(self):
-		self.menu_bar.add_command(label="help", command = self.get_help)
+		self.menu_bar.add_command(label=self.language[2], command = self.get_help)
 
 	def __about(self):
-		self.menu_bar.add_command(label="About", command = self.mwin)
+		self.menu_bar.add_command(label=self.language[3], command = self.mwin)
 
 	def __attack_pswd_e(self):
-		self.pswdatk_menu.add_command(label="enable password attacker", 
+		self.pswdatk_menu.add_command(label=self.language[5], 
 			command = self.pswdatk)
 
 	def __attak_zip_e(self):
-		self.pswdatk_menu.add_command(label="enable zip attacker", 
+		self.pswdatk_menu.add_command(label=self.language[6], 
 			command = self.zipatk)
 
 	def __attak_rar_e(self):
-		self.pswdatk_menu.add_command(label="enable rar attacker", 
+		self.pswdatk_menu.add_command(label=self.language[7], 
 			command = self.raratk)
 
 	def __settings_e(self):
-		self.menu_bar.add_command(label="Settings", 
+		self.menu_bar.add_command(label=self.language[8], 
 			command = self.settings)
