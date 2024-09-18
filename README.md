@@ -15,3 +15,4 @@
 - [x] adding gui interface
 - [x] adding hash password cracker
 - [x] adding zip file cracker
+### ©2024-2025 preprocessed NotXor2007.All rights reserved.
