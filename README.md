@@ -3,7 +3,7 @@
 ## To Do
 
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
-- [ ] adding wordlist support
+- [ ] adding support to wordlist
 - [ ] adding website enumeration tool
 - [ ] adding wifi cracker tool
 - [ ] adding AES-256 encryption method support
