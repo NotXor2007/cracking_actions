@@ -4,14 +4,14 @@
 خصوص
 المهاجمين
 فعل مهاجم كلمة المرور
-zipفعل مهاجم ال
-rarفعل مهاجم ال
+zip فعل مهاجم ال
+rar فعل مهاجم ال
 الاعدادات
 هل أنت متأكد؟
 cracking actions v0.8 هل تريد اغلاق
 cracking actions v0.8-خصوص
-a software that allows you to crack passwords, files, etc...
-developped and published by preprocessed-NotXor2007
+... برنامج يسمح لك بكسر كلمات المرور والملفات وما إلى ذلك
+preprocessed-NotXor2007 تم تطويره ونشره من طرف
 cracking actions v0.8-اعدادات
 اختر لغة
 انقليزية
@@ -24,26 +24,26 @@ cracking actions v0.8-مساعدة
 :الأمر
 :الخوارزمي
 Hash:
-hash of the key
+كلمة المرور hash
 Mgl:
-max generated length
+الحد الأقصى لطول الناتج
 ابدء الهجوم
 أوقف الهجوم
 احذر
-the attack is already running!
+الهجوم قيد التشغيل بالفعل!
 zip أهجم على ملف
 rar أهجم على ملف
 zip اختر ملف
 rar اختر ملف
-اختر مسار الخروج
-file path:
-output path:
-select file
-choose output
-zipfile
-rarfile
-output
-password attacker output
-zip attacker output
-rar attacker output
+اختر مسار المخرج
+:مسار الملف
+:مسار المخرج
+اختر ملف
+اختر مخرج
+zipملف
+rarملف
+مخرج
+مخرج مهاجم كلمة المرور
+zip مخرج مهاجم
+rar مخرج مهاجم
 shell
