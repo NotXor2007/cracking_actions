@@ -3,12 +3,12 @@
 ## To Do
 
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
-- [ ] adding support to wordlist
 - [ ] adding website enumeration tool
 - [ ] adding wifi cracker tool
 - [ ] adding AES-256 encryption method support
 
 ## Done
+- [x] adding support for wordlist
 - [x] adding settings menu
 - [x] adding rar cracker
 - [x] compile for linux and windows

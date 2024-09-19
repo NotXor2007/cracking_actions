@@ -16,7 +16,7 @@ class AttackRar(Widgets):
 		self.file_path, self.file_output="", ""
 
 	def attackAlgo(self, commands_list):
-		self.Commandtype = tk.Label(self.frame,text="Command:")
+		self.Commandtype = tk.Label(self.frame,text=self.language[23])
 		self.attackAlgoW = ttk.Combobox(self.frame)
 		options = commands_list
 		self.attackAlgoW["values"] = options

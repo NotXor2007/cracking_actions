@@ -1,1 +1,49 @@
-Arabic
+عربية
+خروج
+مساعدة
+خصوص
+المهاجمين
+فعل مهاجم كلمة المرور
+zipفعل مهاجم ال
+rarفعل مهاجم ال
+الاعدادات
+هل أنت متأكد؟
+cracking actions v0.8 هل تريد اغلاق
+cracking actions v0.8-خصوص
+a software that allows you to crack passwords, files, etc...
+developped and published by preprocessed-NotXor2007
+cracking actions v0.8-اعدادات
+اختر لغة
+انقليزية
+فرنسية
+عربية
+احفض التغييرات
+احفض
+cracking actions v0.8-مساعدة
+أهجم على كلمة المرور
+:الأمر
+:الخوارزمي
+Hash:
+hash of the key
+Mgl:
+max generated length
+ابدء الهجوم
+أوقف الهجوم
+احذر
+the attack is already running!
+zip أهجم على ملف
+rar أهجم على ملف
+zip اختر ملف
+rar اختر ملف
+اختر مسار الخروج
+file path:
+output path:
+select file
+choose output
+zipfile
+rarfile
+output
+password attacker output
+zip attacker output
+rar attacker output
+shell
