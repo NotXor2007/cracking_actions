@@ -1,6 +1,6 @@
 __pycache__
-./widgets/__pycache__
-./core/__pycache__
-./core/AutoCreator.exe
+widgets/__pycache__
+core/__pycache__
+core/AutoCreator.exe
 venv
 tkdnd2.8-win32-ix86.tar.gz
