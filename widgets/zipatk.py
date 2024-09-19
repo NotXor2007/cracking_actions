@@ -9,46 +9,47 @@ from tkinter import filedialog
 
 class AttackZip(Widgets):
 
-	def __init__(self, window):
+	def __init__(self, win, window):
 		Widgets.__init__(self, window)
-		self.frame = tk.LabelFrame(self.window,text="attack zipfile",borderwidth=4,relief="groove")
+		self.language = win.language
+		self.frame = tk.LabelFrame(self.window,text=self.language[33],borderwidth=4,relief="groove")
 		self.file_path, self.file_output="", ""
 
 	def attackAlgo(self, commands_list):
-		self.Commandtype = tk.Label(self.frame,text="Command:")
+		self.Commandtype = tk.Label(self.frame,text=self.language[23])
 		self.attackAlgoW = ttk.Combobox(self.frame)
 		options = commands_list
 		self.attackAlgoW["values"] = options
 		self.attackAlgoW.set(self.attackAlgoW["values"][0])
 
 	def lengthKey(self):
-		self.Ltype = tk.Label(self.frame,text="Mgl:")
+		self.Ltype = tk.Label(self.frame,text=self.language[27])
 		self.lengthkey = ttk.Entry(self.frame)
-		self.lengthkey.insert(0, "max generated length")
+		self.lengthkey.insert(0, self.language[28])
 
 	def __pathIn(self):
-		self.file_path = filedialog.askopenfilename(title="select a zipfile",
-			filetypes=[("zipfile", ".zip")])
+		self.file_path = filedialog.askopenfilename(title=self.language[35],
+			filetypes=[(self.language[42], ".zip")])
 		if not self.file_path == "":
 			self.FileIE.delete(0, tk.END)
 			self.FileIE.insert(tk.END, self.file_path)
 
 	def __pathOut(self):
-		self.file_output = filedialog.askdirectory(title="choose output dir")
+		self.file_output = filedialog.askdirectory(title=self.language[37])
 		if not self.file_output == "":
 			self.FileOutE.delete(0, tk.END)
 			self.FileOutE.insert(tk.END, self.file_output)
 
 	def fileIn(self):
-		self.FItype = tk.Label(self.frame,text="file path:")
+		self.FItype = tk.Label(self.frame,text=self.language[38])
 		self.FileIE = ttk.Entry(self.frame)
-		self.fibtn = tk.Button(self.frame,text="select file",
+		self.fibtn = tk.Button(self.frame,text=self.language[40],
 			command=lambda :self.__pathIn())
 
 	def fileOut(self):
-		self.FOuttype = tk.Label(self.frame,text="output path:")
+		self.FOuttype = tk.Label(self.frame,text=self.language[39])
 		self.FileOutE = ttk.Entry(self.frame)
-		self.foutbtn = tk.Button(self.frame,text="choose output",
+		self.foutbtn = tk.Button(self.frame,text=self.language[41],
 			command=lambda :self.__pathOut())
 
 
@@ -62,7 +63,7 @@ class AttackZip(Widgets):
 
 	def __start_btn_cmd(self, S):
 		if not Start.STOPZIP:
-			result = messagebox.showwarning("Warning", "the attack is already running!")
+			result = messagebox.showwarning(self.language[31], self.language[32])
 		else:
 			Start.STOPZIP = False
 			self.task = threading.Thread(target=S.attackZip, args=(
@@ -73,14 +74,14 @@ class AttackZip(Widgets):
 		Start.STOPZIP = True
 
 	def start_btn(self, S):
-		self.stabtn = tk.Button(self.frame,text="start attack",
+		self.stabtn = tk.Button(self.frame,text=self.language[29],
 			command=lambda :self.__start_btn_cmd(S))
 
 	def __help(self):
 		self.menu_bar.add_command(label="help", command = self.get_help)
 
 	def stop_btn(self):
-		self.stobtn = tk.Button(self.frame,text="stop attack",
+		self.stobtn = tk.Button(self.frame,text=self.language[30],
 			command=self.__stop_btn_cmd)
 
 	def pack(self):

@@ -12,3 +12,38 @@ Do you want to close cracking actions v0.8
 cracking actions v0.8-About
 a software that allows you to crack passwords, files, etc...
 developped and published by preprocessed-NotXor2007
+cracking actions v0.8-Settings
+select a language
+English
+French
+Arabic
+apply changes
+Apply
+cracking actions v0.8-help
+attack password
+Command:
+Algorithm:
+Hash:
+hash of the key
+Mgl:
+max generated length
+start attack
+stop attack
+Warning
+the attack is already running!
+attack zipfile
+attack rarfile
+select a zipfile
+select a rarfile
+choose output dir
+file path:
+output path:
+select file
+choose output
+zipfile
+rarfile
+output
+password attacker output
+zip attacker output
+rar attacker output
+shell

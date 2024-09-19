@@ -10,6 +10,8 @@ def readcfg():
 			if line.startswith("LANGUAGE="):
 				with open(line[9 : ], "r", encoding = "utf-8") as lang:
 					language = lang.readlines()
+		for string in language:
+			language[language.index(string)] = string.rstrip("\n")
 		return language
 	except Exception as e:
 		return -1

@@ -36,7 +36,7 @@ class Window:
 		self.window.configure(background="#"+self.bg)
 		self.window.iconbitmap(icon)
 		self.window.resizable(False, False)
-		self.window.wm_attributes("-topmost", False)
+		self.window.wm_attributes("-topmost", True)
 		self.redraw()
 		self.window.geometry(f"{self.w}x{self.h}+0+0")
 		self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -50,7 +50,7 @@ class Window:
 
 	def __wsetup(self, commands_list, types_list, S):
 		#set up password attacker gui
-		self.pswdattack = AttackPswd(self.window)
+		self.pswdattack = AttackPswd(self, self.window)
 		self.pswdattack.attackAlgo(commands_list)
 		self.pswdattack.attackType(types_list)
 		self.pswdattack.hashedKey()
@@ -58,7 +58,7 @@ class Window:
 		self.pswdattack.start_btn(S)
 		self.pswdattack.stop_btn()
 		#set up zip attacker gui
-		self.zipattack = AttackZip(self.window)
+		self.zipattack = AttackZip(self, self.window)
 		self.zipattack.attackAlgo(commands_list)
 		self.zipattack.lengthKey()
 		self.zipattack.fileIn()
@@ -66,7 +66,7 @@ class Window:
 		self.zipattack.start_btn(S)
 		self.zipattack.stop_btn()
 		#set up rar attacker gui
-		self.rarattack = AttackRar(self.window)
+		self.rarattack = AttackRar(self, self.window)
 		self.rarattack.attackAlgo(commands_list)
 		self.rarattack.lengthKey()
 		self.rarattack.fileIn()
@@ -74,7 +74,7 @@ class Window:
 		self.rarattack.start_btn(S)
 		self.rarattack.stop_btn()
 		#set up output attacker gui
-		self.out = OutputTerm(self.window)
+		self.out = OutputTerm(self, self.window)
 		self.out.output()
 		#pack gui
 		self.pswdattack.pack()
@@ -112,7 +112,7 @@ class Window:
 		help_window.configure(bg=windowc)
 		help_window.iconbitmap(icon)
 		help_window.wm_attributes("-alpha", 0.85)
-		help_window.title("cracking actions v0.8-help")
+		help_window.title(self.language[21])
 		scroll = scrolledtext.ScrolledText(help_window,width=950,
 			height=600, bg=windowc, wrap=tk.WORD)
 		scroll.pack()
@@ -397,7 +397,7 @@ if __name__ == "__main__":
 	if not os.path.exists(".\\settings.cfg"):
 		pass #TODO:Run AutoCreator.exe
 	else:
-		language = cfghandler.readcfg()
+		language = cfghandler.readcfg() #TODO:take car of return exceptions
 	if check_man():
 		Manual("cracking actions v0.8", commands_list, available_types)
 	elif check_cli():

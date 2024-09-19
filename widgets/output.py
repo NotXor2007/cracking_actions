@@ -4,18 +4,19 @@ from supercls import Widgets
 
 class OutputTerm(Widgets):
 
-	def __init__(self, window):
+	def __init__(self, win, window):
 		Widgets.__init__(self, window)
-		self.frame = tk.LabelFrame(self.window,borderwidth=4,text="output",relief="groove")
+		self.language = win.language
+		self.frame = tk.LabelFrame(self.window,borderwidth=4,text=self.language[44],relief="groove")
 		self.notebook = ttk.Notebook(self.frame)
 		self.pswdtab = ttk.Frame(self.notebook)
 		self.ziptab = ttk.Frame(self.notebook)
 		self.rartab = ttk.Frame(self.notebook)
 		self.console = ttk.Frame(self.notebook)
-		self.notebook.add(self.pswdtab, text="password attacker output")
-		self.notebook.add(self.ziptab, text="zip attacker output")
-		self.notebook.add(self.rartab, text="rar attacker output")
-		self.notebook.add(self.console, text="shell")
+		self.notebook.add(self.pswdtab, text=self.language[45])
+		self.notebook.add(self.ziptab, text=self.language[46])
+		self.notebook.add(self.rartab, text=self.language[47])
+		self.notebook.add(self.console, text=self.language[48])
 
 	def output(self):
 		self.pswdout = tk.Text(self.pswdtab)

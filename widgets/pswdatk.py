@@ -8,36 +8,37 @@ from tkinter import messagebox
 
 class AttackPswd(Widgets):
 
-	def __init__(self, window):
+	def __init__(self, win, window):
 		Widgets.__init__(self, window)
-		self.frame = tk.LabelFrame(self.window,text="attack password",borderwidth=4,relief="groove")
+		self.language = win.language
+		self.frame = tk.LabelFrame(self.window,text=self.language[22],borderwidth=4,relief="groove")
 
 	def attackAlgo(self, commands_list):
-		self.Commandtype = tk.Label(self.frame,text="Command:")
+		self.Commandtype = tk.Label(self.frame,text=self.language[23])
 		self.attackAlgoW = ttk.Combobox(self.frame)
 		options = commands_list
 		self.attackAlgoW["values"] = options
 		self.attackAlgoW.set(self.attackAlgoW["values"][0])
 
 	def attackType(self, types_list):
-		self.Attacktype = tk.Label(self.frame,text="Algorithm:")
+		self.Attacktype = tk.Label(self.frame,text=self.language[24])
 		self.attackTypeW = ttk.Combobox(self.frame)
 		options = types_list
 		self.attackTypeW["values"] = options
 		self.attackTypeW.set(self.attackTypeW["values"][0])
 
 	def hashedKey(self):
-		self.Hashtype = tk.Label(self.frame,text="Hash:")
+		self.Hashtype = tk.Label(self.frame,text=self.language[25])
 		self.hashedkey = ttk.Entry(self.frame)
-		self.hashedkey.insert(0, "hash of the key")
+		self.hashedkey.insert(0, self.language[26])
 
 	def __getHash(self):
 		return self.hashedkey.get()
 
 	def lengthKey(self):
-		self.Ltype = tk.Label(self.frame,text="Mgl:")
+		self.Ltype = tk.Label(self.frame,text=self.language[27])
 		self.lengthkey = ttk.Entry(self.frame)
-		self.lengthkey.insert(0, "max generated length")
+		self.lengthkey.insert(0, self.language[28])
 
 	def __getOption(self):
 		option = self.attackAlgoW.get()
@@ -49,7 +50,7 @@ class AttackPswd(Widgets):
 
 	def __start_btn_cmd(self, S):
 		if not Start.STOPPSWD:
-			result = messagebox.showwarning("Warning", "the attack is already running!")
+			result = messagebox.showwarning(self.language[31], self.language[32])
 		else:
 			Start.STOPPSWD = False
 			self.task = threading.Thread(target=S.attackHash, args=(
@@ -61,11 +62,11 @@ class AttackPswd(Widgets):
 		Start.STOPPSWD = True
 
 	def start_btn(self, S):
-		self.stabtn = tk.Button(self.frame,text="start attack",
+		self.stabtn = tk.Button(self.frame,text=self.language[29],
 				command=lambda :self.__start_btn_cmd(S))
 
 	def stop_btn(self):
-		self.stobtn = tk.Button(self.frame,text="stop attack",
+		self.stobtn = tk.Button(self.frame,text=self.language[30],
 			command=self.__stop_btn_cmd)
 
 	def pack(self):
