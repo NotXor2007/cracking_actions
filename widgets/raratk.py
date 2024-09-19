@@ -15,12 +15,19 @@ class AttackRar(Widgets):
 		self.frame = tk.LabelFrame(self.window,text=self.language[34],borderwidth=4,relief="groove")
 		self.file_path, self.file_output="", ""
 
+	def checkalogw(self, event):
+		if self.attackAlgoW.get() in commands_list:
+			self.lengthkey.config(state="normal")
+		else:
+			self.lengthkey.config(state="disabled")
+
 	def attackAlgo(self, commands_list):
 		self.Commandtype = tk.Label(self.frame,text=self.language[23])
 		self.attackAlgoW = ttk.Combobox(self.frame)
 		options = commands_list
 		self.attackAlgoW["values"] = options
 		self.attackAlgoW.set(self.attackAlgoW["values"][0])
+		self.attackAlgoW.bind("<<ComboboxSelected>>", self.checkalogw)
 
 	def lengthKey(self):
 		self.Ltype = tk.Label(self.frame,text=self.language[27])

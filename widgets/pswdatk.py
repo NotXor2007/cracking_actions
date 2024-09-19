@@ -16,8 +16,10 @@ class AttackPswd(Widgets):
 	def checkalogw(self, event):
 		if self.attackAlgoW.get() in commands_list:
 			self.attackTypeW.config(state="readonly")
+			self.lengthkey.config(state="normal")
 		else:
 			self.attackTypeW.config(state="disabled")
+			self.lengthkey.config(state="disabled")
 
 	def attackAlgo(self, commands_list):
 		self.Commandtype = tk.Label(self.frame,text=self.language[23])

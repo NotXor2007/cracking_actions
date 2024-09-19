@@ -1,4 +1,4 @@
-#a password cracker by adam naanaa
+#a password cracker by NotXor2007
 #finished in 
 #importing libraries
 import sys, os, platform
@@ -193,6 +193,8 @@ class Window:
 				self.wlist = wlist.readlines()
 			commands_list.append(file_path)
 			self.pswdattack.attackAlgoW["values"]= commands_list
+			self.zipattack.attackAlgoW["values"]= commands_list
+			self.rarattack.attackAlgoW["values"]= commands_list
 			commands_list.remove(commands_list[-1])
 
 
