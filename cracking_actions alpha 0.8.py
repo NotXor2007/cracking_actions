@@ -8,6 +8,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter import scrolledtext
+from tkinter import filedialog
 from const import*
 from core.engine import*
 from widgets.settings import Settings
@@ -29,6 +30,7 @@ class Window:
 		self.w, self.h = w, h
 		self.title = title
 		self.bg = bg
+		self.wlist = None
 		self.language = language
 		self.window = tk.Tk()
 		self.wsettings = Settings(self, self.window, self.language)
@@ -45,6 +47,8 @@ class Window:
 		self.__shell_enabler()
 		self.pswdatk()
 		self.__draw()
+		self.pswdattack.attackAlgoW.config(state="readonly")
+		self.pswdattack.attackTypeW.config(state="readonly")
 		self.window.geometry(f"+{sc_width//2-self.w//2}+{sc_height//2-self.h//2}")
 		self.update()
 
@@ -99,7 +103,7 @@ class Window:
 	#create menu
 	def __menu(self):
 		menu = MenuBar(self, self.window, self.on_closing, self.get_help, 
-			self.pswdatk, self.zipatk, self.raratk, self.settings, self.mwin)
+			self.pswdatk, self.zipatk, self.raratk, self.load_wlst, self.settings, self.mwin)
 
 	def on_closing(self):
 		result = messagebox.askokcancel(self.language[9], self.language[10])
@@ -159,7 +163,9 @@ class Window:
 		for child in self.pswdattack.frame.winfo_children():
 			child.configure(state="active")
 		for child in self.rarattack.frame.winfo_children():
-			child.configure(state="disabled")	
+			child.configure(state="disabled")
+		self.pswdattack.attackAlgoW.config(state="readonly")
+		self.pswdattack.attackTypeW.config(state="readonly")
 
 	def zipatk(self):
 		for child in self.pswdattack.frame.winfo_children():
@@ -167,7 +173,8 @@ class Window:
 		for child in self.zipattack.frame.winfo_children():
 			child.configure(state="active")
 		for child in self.rarattack.frame.winfo_children():
-			child.configure(state="disabled")	
+			child.configure(state="disabled")
+		self.zipattack.attackAlgoW.config(state="readonly")
 
 	def raratk(self):
 		for child in self.pswdattack.frame.winfo_children():
@@ -176,6 +183,18 @@ class Window:
 			child.configure(state="disabled")
 		for child in self.rarattack.frame.winfo_children():
 			child.configure(state="active")
+		self.rarattack.attackAlgoW.config(state="readonly")	
+
+	def load_wlst(self):
+		file_path = filedialog.askopenfilename(title="open wordlist",
+			filetypes=[("wordlist file", ".txt")])
+		if file_path != "":
+			with open(file_path, "r", encoding="utf-8") as wlist:
+				self.wlist = wlist.readlines()
+			commands_list.append(file_path)
+			self.pswdattack.attackAlgoW["values"]= commands_list
+			commands_list.remove(commands_list[-1])
+
 
 	def settings(self):
 		self.wsettings.show_settings()

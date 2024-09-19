@@ -13,12 +13,19 @@ class AttackPswd(Widgets):
 		self.language = win.language
 		self.frame = tk.LabelFrame(self.window,text=self.language[22],borderwidth=4,relief="groove")
 
+	def checkalogw(self, event):
+		if self.attackAlgoW.get() in commands_list:
+			self.attackTypeW.config(state="readonly")
+		else:
+			self.attackTypeW.config(state="disabled")
+
 	def attackAlgo(self, commands_list):
 		self.Commandtype = tk.Label(self.frame,text=self.language[23])
 		self.attackAlgoW = ttk.Combobox(self.frame)
 		options = commands_list
 		self.attackAlgoW["values"] = options
 		self.attackAlgoW.set(self.attackAlgoW["values"][0])
+		self.attackAlgoW.bind("<<ComboboxSelected>>", self.checkalogw)
 
 	def attackType(self, types_list):
 		self.Attacktype = tk.Label(self.frame,text=self.language[24])

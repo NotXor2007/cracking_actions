@@ -2,7 +2,7 @@ import tkinter as tk
 
 class MenuBar:
 
-	def __init__(self, win, window, on_closing, get_help, pswdatk, zipatk, raratk, settings, mwin):
+	def __init__(self, win, window, on_closing, get_help, pswdatk, zipatk, raratk, load_wlst, settings, mwin):
 		self.menu_bar = tk.Menu(window)
 		self.on_closing = on_closing
 		self.get_help = get_help
@@ -10,6 +10,7 @@ class MenuBar:
 		self.zipatk = zipatk
 		self.raratk = raratk
 		self.settings = settings
+		self.load_wlst = load_wlst
 		self.mwin = mwin
 		self.language = win.language
 		self.__exit()
@@ -25,6 +26,7 @@ class MenuBar:
 		self.__attack_pswd_e()
 		self.__attak_zip_e()
 		self.__attak_rar_e()
+		self.__load_wlist_e()
 		self.__settings_e()
 	#creating menus and calling events
 	def __exit(self):
@@ -48,6 +50,10 @@ class MenuBar:
 		self.pswdatk_menu.add_command(label=self.language[7], 
 			command = self.raratk)
 
+	def __load_wlist_e(self):
+		self.pswdatk_menu.add_command(label="load wordlist", 
+			command = self.load_wlst)
+
 	def __settings_e(self):
 		self.menu_bar.add_command(label=self.language[8], 
-			command = self.settings)
+			command = self.raratk)

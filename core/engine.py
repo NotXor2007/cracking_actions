@@ -115,7 +115,7 @@ class Start:
 				self.result = self.show_check(hash_type,new_key,hashed_key,key)
 				self.__printHash(self.result[0],key,self.result[1],hashed_key,cli)
 				if not cli:
-					self.win.readraw()
+					self.win.redraw()
 					self.win.Aupdate()
 				if self.result[0] == 1:
 					Start.STOPPSWD = True
@@ -175,7 +175,7 @@ class Start:
 					continue
 				if not cli:
 					self.win.out.zipout.insert("end","current key is "+key)
-					self.win.readraw()
+					self.win.redraw()
 					self.win.Aupdate()
 				else:
 					print("current key is "+key)
@@ -232,7 +232,7 @@ class Start:
 					continue
 				if not cli:
 					self.win.out.rarout.insert("end","current key is "+key)
-					self.win.readraw()
+					self.win.redraw()
 					self.win.Aupdate()
 				else:
 					print("current key is "+key)

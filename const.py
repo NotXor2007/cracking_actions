@@ -29,14 +29,14 @@ char_options = (string.digits,string.ascii_lowercase,string.ascii_uppercase
 ,string.punctuation+string.ascii_letters+" "
 ,string.punctuation+string.ascii_letters+string.digits+" ")
 
-commands_list = ("start -n","start -cl", "start -cu", "start -cl -n", 
+commands_list = ["start -n","start -cl", "start -cu", "start -cl -n", 
 "start -cu -n", "start -cu -cl", "start -cu -cl -n", "start -s", "start -s -n",
 "start -s -cl", "start -s -cu", "start -s -cl -n", "start -s -cu -n", 
 "start -s -cu -cl", "start -s -cu -cl -n", "start -sp -n", "start -sp -cl",
 "start -sp -cu", "start -sp -cl -n", "start -sp -cu -n", "start -sp -cu -cl",
 "start -sp -cu -cl -n", "start -sp -s", "start -sp -s -n", "start -sp -s -cl",
 "start -sp -s -cu", "start -sp -s -cl -n", "start -sp -s -cu -n", 
-"start -sp -s -cu -cl", "start -sp -s -cu -cl -n")
+"start -sp -s -cu -cl", "start -sp -s -cu -cl -n"]
 
 commands_list_man = ("start -n: to use password cracker only for numbers",
 	"start -cl: to use it only for lowercase letters", 
