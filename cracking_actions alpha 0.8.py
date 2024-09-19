@@ -87,6 +87,11 @@ class Window:
 
 	def __draw(self):
 		#draw gui frame
+		tk.Grid.columnconfigure(self.window, 0, weight=1)
+		tk.Grid.columnconfigure(self.window, 1, weight=1)
+		tk.Grid.columnconfigure(self.window, 2, weight=1)
+		tk.Grid.rowconfigure(self.window, 0, weight=1)
+
 		self.pswdattack.frame.grid(row=0, column=0, columnspan=1, sticky="nesw")
 		self.zipattack.frame.grid(row=0, column=1, columnspan=1, sticky="nwse")
 		self.rarattack.frame.grid(row=0, column=2, columnspan=1, sticky="nwse")
