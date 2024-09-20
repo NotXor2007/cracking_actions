@@ -1,12 +1,19 @@
 import string
 import rarfile
 import ctypes
+import platform
 
-rarfile.UNRAR_TOOL = ".\\core\\unrar.exe"
-icon = ".\\icon\\cracking-actions-icon.ico"
+if platform.system().lower() == "windows":
+	rarfile.UNRAR_TOOL = ".\\core\\unrar.exe"
+	icon = ".\\icon\\cracking-actions-icon.ico"
+	settingsfile = ".\\settings.cfg"
+	AutoCreator = ".\\core\\AutoCreator.exe"
+	sc_width = ctypes.windll.user32.GetSystemMetrics(0)
+	sc_height = ctypes.windll.user32.GetSystemMetrics(1)
+elif platform.system().lower() == "linux":
+	pass #TODO
+
 cdate = "©2023-2025 preprocessed NotXor2007.All rights reserved.20/09/2024"
-sc_width = ctypes.windll.user32.GetSystemMetrics(0)
-sc_height = ctypes.windll.user32.GetSystemMetrics(1)
 
 available_types = ["md5","sha1","sha224","sha384","sha3_224","sha3_512","sha3_384","sha3_256","sha256","sha512","blake2b","blake2s"]
 

@@ -423,9 +423,9 @@ if __name__ == "__main__":
 	if platform.architecture()[0] == "32it":
 		MessageBox("failed to run because you aren't on a 64-bit machine","Exit with Failure",MB_OK|MB_ICONERROR)
 		sys.exit(-1)
-	if not os.path.exists(".\\settings.cfg"):
+	if not os.path.exists(settingsfile):
 		subp = __import__("subprocess")
-		subp.run([".\\core\\AutoCreator.exe", "--settings"], shell = True)
+		subp.run([AutoCreator, "--settings"], shell = True)
 		language = cfghandler.readcfg()
 	else:
 		language = cfghandler.readcfg() #TODO:take car of return exceptions
