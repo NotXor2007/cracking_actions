@@ -7,7 +7,7 @@
 #### you will need 7zip or winrar or any program capable of extracting zip file to extract it
 #### finally run cracking-actions alpha 0.8 executable file
 ## Building from source:
-' git clone https://github.com/NotXor2007/cracking_actions.git '
+'git clone https://github.com/NotXor2007/cracking_actions.git'
 ## To Do
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
 - [ ] adding AES-256 encryption method support
