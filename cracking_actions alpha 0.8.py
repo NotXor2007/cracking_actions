@@ -6,7 +6,8 @@ import colorama
 from colorama import Fore
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
+from win32ui import MessageBox
+from win32con import*
 from tkinter import scrolledtext
 from tkinter import filedialog
 from const import*
@@ -38,7 +39,7 @@ class Window:
 		self.window.configure(background="#"+self.bg)
 		self.window.iconbitmap(icon)
 		self.window.resizable(False, False)
-		self.window.wm_attributes("-topmost", True)
+		self.window.wm_attributes("-topmost", False)
 		self.redraw()
 		self.window.geometry(f"{self.w}x{self.h}+0+0")
 		self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -106,11 +107,8 @@ class Window:
 			self.pswdatk, self.zipatk, self.raratk, self.load_wlst, self.settings, self.mwin)
 
 	def on_closing(self):
-		result = messagebox.askokcancel(self.language[9], self.language[10])
-		if result:
+		if MessageBox(self.language[10], self.language[9], MB_YESNO | MB_ICONQUESTION) == 6:
 			sys.exit(0)
-		else:
-			pass
 
 	def get_help(self):
 		windowc = "#000022"
@@ -422,8 +420,9 @@ def check_man():
 	return False
 
 if __name__ == "__main__":
-	if platform.architecture()[0] == "32bit":
-		pass
+	if platform.architecture()[0] == "32it":
+		MessageBox("failed to run because you aren't on a 64-bit machine","Exit with Failure",MB_OK|MB_ICONERROR)
+		sys.exit(-1)
 	if not os.path.exists(".\\settings.cfg"):
 		subp = __import__("subprocess")
 		subp.run([".\\core\\AutoCreator.exe", "--settings"], shell = True)

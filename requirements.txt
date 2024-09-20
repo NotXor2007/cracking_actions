@@ -1,3 +1,4 @@
 colorama
 rarfile
 zipfile-deflate64 
+pywin32
