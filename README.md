@@ -13,6 +13,7 @@ clone the repository
 `pip install -r requirements.txt`
 ### Note:it's recommanded to create a virtual environment for the project using this command in the console
 `python -m venv venv`
+#####
 here is how to use the virtual environment on windows
 `.\venv\scripts\activate.bat`
 #### here is how to do it on linux
