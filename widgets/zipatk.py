@@ -35,15 +35,17 @@ class AttackZip(Widgets):
 		self.lengthkey.insert(0, self.language[28])
 
 	def __pathIn(self):
-		self.file_path = filedialog.askopenfilename(title=self.language[35],
+		file_path = filedialog.askopenfilename(title=self.language[35],
 			filetypes=[(self.language[42], ".zip")])
-		if not self.file_path == "":
+		if not file_path == "":
+			self.file_path= file_path
 			self.FileIE.delete(0, tk.END)
 			self.FileIE.insert(tk.END, self.file_path)
 
 	def __pathOut(self):
-		self.file_output = filedialog.askdirectory(title=self.language[37])
-		if not self.file_output == "":
+		file_output = filedialog.askdirectory(title=self.language[37])
+		if not file_output == "":
+			self.file_output = file_output
 			self.FileOutE.delete(0, tk.END)
 			self.FileOutE.insert(tk.END, self.file_output)
 
@@ -73,8 +75,12 @@ class AttackZip(Widgets):
 			result = messagebox.showwarning(self.language[31], self.language[32])
 		else:
 			Start.STOPZIP = False
-			self.task = threading.Thread(target=S.attackZip, args=(
-				self.file_path,self.file_output,self.lengthkey.get(),self.__getOption()))
+			if self.attackAlgoW.get() in commands_list:
+				self.task = threading.Thread(target=S.attackZip, args=(
+					self.file_path,self.file_output,self.lengthkey.get(),self.__getOption()))
+			else:
+				self.task = threading.Thread(target=S.attackZipWlst, args=(
+					self.file_path,self.file_output))
 			self.task.start()
 
 	def __stop_btn_cmd(self):

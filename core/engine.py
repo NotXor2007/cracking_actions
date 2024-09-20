@@ -173,17 +173,85 @@ class Start:
 					return
 				else:
 					continue
-				if not cli:
-					self.win.out.zipout.insert("end","current key is "+key)
-					self.win.redraw()
-					self.win.Aupdate()
-				else:
-					print("current key is "+key)
 		if not cli:
 			self.win.out.zipout.insert("end","key not found!\n")
 		else:
 			print("key not found!")
 		Start.STOPZIP = True
+
+	def checkZip(self, key, file, output, cli, result):
+		try:
+			f = zipfile.ZipFile(file)
+			self.__printcompressed(self.win.out.zipout, key, file, cli)
+			try:
+				f.setpassword(pwd=key.encode())
+				f.extractall(output)
+				f.close()
+				if not cli:
+					self.win.out.zipout.insert("end",f"key found:{key}\n")
+				else:
+					print(f"key found:{key}")
+				return 0 #key found
+			except RuntimeError as e:
+				return 1 #key not found
+		except Exception as e:
+			if not cli:
+				self.win.out.zipout.insert("end","Warning:incorrect file name or path!\n")
+			else:
+				print("Warning:incorrect file name or path!")
+			return -1 #this is crucial
+
+	def attackZipWlst(self, file, output, cli=False):
+		result = 0
+		Start.STOPZIP = False
+		if self.win.wlist != None:
+			for key in self.win.wlist:
+				info = self.checkZip(key, file, output, cli, result)
+				if info == 0:
+					Start.STOPZIP = True
+					return
+				elif info == 1:
+					continue
+				elif info == -1:
+					Start.STOPZIP = True
+			Start.STOPZIP = True
+
+	def checkRar(self, key, file, output, cli, result):
+		try:
+			f = rarfile.RarFile(file)
+			self.__printcompressed(self.win.out.rarout, key, file, cli)
+			try:
+				f.setpassword(pwd=key)
+				f.extractall(output)
+				f.close()
+				if not cli:
+					self.win.out.rarout.insert("end",f"key found:{key}\n")
+				else:
+					print(f"key found:{key}")
+				return 0 #key found
+			except RuntimeError as e:
+				return 1 #key not found
+		except Exception as e:
+			if not cli:
+				self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
+			else:
+				print("Warning:incorrect file name or path!")
+			return -1 #this is crucial
+
+	def attackRarWlst(self, file, output, cli=False):
+		result = 0
+		Start.STOPRAR = False
+		if self.win.wlist != None:
+			for key in self.win.wlist:
+				info = self.checkRar(key, file, output, cli, result)
+				if info == 0:
+					Start.STOPRAR = True
+					return
+				elif info == 1:
+					continue
+				elif info == -1:
+					continue
+			Start.STOPRAR = True
 
 	def attackRar(self, file, output, length_key, option, cli=False):
 		result = 0
@@ -230,12 +298,6 @@ class Start:
 					return
 				else:
 					continue
-				if not cli:
-					self.win.out.rarout.insert("end","current key is "+key)
-					self.win.redraw()
-					self.win.Aupdate()
-				else:
-					print("current key is "+key)
 		if not cli:
 			self.win.out.rarout.insert("end","key not found!\n")
 		else:

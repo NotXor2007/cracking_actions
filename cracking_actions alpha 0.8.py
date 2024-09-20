@@ -191,11 +191,14 @@ class Window:
 		if file_path != "":
 			with open(file_path, "r", encoding="utf-8") as wlist:
 				self.wlist = wlist.readlines()
+			for word in self.wlist:
+				self.wlist[self.wlist.index(word)] = word.rstrip("\n")
 			commands_list.append(file_path)
 			self.pswdattack.attackAlgoW["values"]= commands_list
 			self.zipattack.attackAlgoW["values"]= commands_list
 			self.rarattack.attackAlgoW["values"]= commands_list
 			commands_list.remove(commands_list[-1])
+			self.out.console.insert(tk.END, "loaded %s\n"%file_path)
 
 
 	def settings(self):
