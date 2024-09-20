@@ -13,12 +13,12 @@ clone the repository
 `pip install -r requirements.txt`
 ### Note:it's recommanded to create a virtual environment for the project using this command in the console
 `python -m venv venv`
-#### here is how to use the virtual environment on windows
+here is how to use the virtual environment on windows
 `.\venv\scripts\activate.bat`
 #### here is how to do it on linux
 #### and you need also to compile the AutoCreaotr.bas which is found in <u>core</u> directory using fbc.exe, so you need to install FreeBasic compiler finally to get AutoCreator executable file
 ### here is how to do that
-#### navigate to the core directory and then type in console
+navigate to the core directory and then type in console
 `fbc AutoCreator.bas`
 ### Note:of coure you need to add fbc to path or simply write the full path to fbc
 #### and finally you can build the project by typing thz following in the console in the repo directory
