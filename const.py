@@ -4,7 +4,7 @@ import ctypes
 
 rarfile.UNRAR_TOOL = ".\\core\\unrar.exe"
 icon = ".\\icon\\cracking-actions-icon.ico"
-cdate = "©2023-2025 preprocessed NotXor2007.All rights reserved.12/09/2024"
+cdate = "©2023-2025 preprocessed NotXor2007.All rights reserved.20/09/2024"
 sc_width = ctypes.windll.user32.GetSystemMetrics(0)
 sc_height = ctypes.windll.user32.GetSystemMetrics(1)
 

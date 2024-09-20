@@ -5,6 +5,8 @@ def readcfg():
 	try:
 		with open("settings.cfg", "r", encoding = "utf-8") as settings:
 			lines = settings.readlines()
+		for line in lines:
+			lines[lines.index(line)] = line.rstrip("\n")
 		lanuage = None
 		for line in lines:
 			if line.startswith("LANGUAGE="):

@@ -51,9 +51,9 @@ class MenuBar:
 			command = self.raratk)
 
 	def __load_wlist_e(self):
-		self.pswdatk_menu.add_command(label="load wordlist", 
+		self.pswdatk_menu.add_command(label=self.language[49], 
 			command = self.load_wlst)
 
 	def __settings_e(self):
 		self.menu_bar.add_command(label=self.language[8], 
-			command = self.raratk)
+			command = self.settings)

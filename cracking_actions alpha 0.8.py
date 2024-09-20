@@ -186,8 +186,8 @@ class Window:
 		self.rarattack.attackAlgoW.config(state="readonly")	
 
 	def load_wlst(self):
-		file_path = filedialog.askopenfilename(title="open wordlist",
-			filetypes=[("wordlist file", ".txt")])
+		file_path = filedialog.askopenfilename(title=self.language[50],
+			filetypes=[(self.language[51], ".txt")])
 		if file_path != "":
 			with open(file_path, "r", encoding="utf-8") as wlist:
 				self.wlist = wlist.readlines()
@@ -198,8 +198,7 @@ class Window:
 			self.zipattack.attackAlgoW["values"]= commands_list
 			self.rarattack.attackAlgoW["values"]= commands_list
 			commands_list.remove(commands_list[-1])
-			self.out.console.insert(tk.END, "loaded %s\n"%file_path)
-
+			self.out.console.insert(tk.END, "%s %s\n"%(self.language[52],file_path))
 
 	def settings(self):
 		self.wsettings.show_settings()
@@ -423,8 +422,12 @@ def check_man():
 	return False
 
 if __name__ == "__main__":
+	if platform.architecture()[0] == "32bit":
+		pass
 	if not os.path.exists(".\\settings.cfg"):
-		pass #TODO:Run AutoCreator.exe
+		subp = __import__("subprocess")
+		subp.run([".\\core\\AutoCreator.exe", "--settings"], shell = True)
+		language = cfghandler.readcfg()
 	else:
 		language = cfghandler.readcfg() #TODO:take car of return exceptions
 	if check_man():

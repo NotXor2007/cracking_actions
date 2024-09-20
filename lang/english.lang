@@ -47,3 +47,7 @@ password attacker output
 zip attacker output
 rar attacker output
 shell
+load wordlist
+open wordlist
+wordlist file
+loaded
