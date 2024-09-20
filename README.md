@@ -24,7 +24,7 @@ navigate to the core directory and then type in console
 ### Note:of coure you need to add fbc to path or simply write the full path to fbc
 #### and finally you can build the project by typing thz following in the console in the repo directory
 `pyinstaller --onefile --icon [icon-path] [cracking-actions.py file]`
-#### after this you should get a dist directory where the exe should, simply now copy the lang and the icon and the core directories to the dist dir and leave in the core dir AutoCreator executable and copy to it an external file which is unrar.exe you can get it from sourceforge
+#### after this you should get a dist directory where the exe should, simply now copy the lang and the icon and the core directories to the dist dir and leave in the core dir AutoCreator executable and copy to it an external file which is unrar.exe you can get it from the binary release
 ## To Do
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
 - [ ] adding AES-256 encryption method support
