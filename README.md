@@ -7,7 +7,22 @@
 #### you will need 7zip or winrar or any program capable of extracting zip file to extract it
 #### finally run cracking-actions alpha 0.8 executable file
 ## Building from source:
+clone the repository
 `git clone https://github.com/NotXor2007/cracking_actions.git`
+#### you will need to install python interpreter and then install the requirements using this command
+`pip install -r requirements.txt`
+### Note:it's recommanded to create a virtual environment for the project using this command in the console
+`python -m venv venv`
+#### here is how to use the virtual environment on windows
+`.\venv\scripts\activate.bat`
+#### here is how to do it on linux
+#### and you need also to compile the AutoCreaotr.bas which is found in <u>core</u> directory using fbc.exe, so you need to install FreeBasic compiler finally to get AutoCreator executable file
+### here is how to do that
+#### navigate to the core directory and then type in console
+`fbc AutoCreator.bas`
+### Note:of coure you need to add fbc to path or simply write the full path to fbc
+#### and finally you can build the project by typing thz following in the console in the repo directory
+`pyinstaller --onefile --icon [icon-path] [cracking-actions.py file]`
 ## To Do
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
 - [ ] adding AES-256 encryption method support
