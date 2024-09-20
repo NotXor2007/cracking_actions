@@ -1,5 +1,5 @@
 # cracking-actions
-## cracking-actions is an open source software that allows you to crack passwords, files, etc... also it's available on windows and linux
+### cracking-actions is an open source software that allows you to crack passwords, files, etc... also it's available on windows and linux
 ## requirements:
 #### windows 7 or later
 ## Installation guide:
