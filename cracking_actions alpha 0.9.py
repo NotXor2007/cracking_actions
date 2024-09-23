@@ -26,9 +26,9 @@ from core import cfghandler
 
 class Window:
 
-	def __init__(self, w, h, title, bg, commands_list, types_list, language):
+	def __init__(self, title, bg, commands_list, types_list, language):
 		S = Start(self)
-		self.w, self.h = w, h
+		self.w, self.h = None, None
 		self.title = title
 		self.bg = bg
 		self.wlist = None
@@ -38,8 +38,9 @@ class Window:
 		self.window.title(title)
 		self.window.configure(background="#"+self.bg)
 		self.window.iconbitmap(icon)
-		self.window.resizable(False, False)
+		self.window.resizable(True, True)
 		self.window.wm_attributes("-topmost", False)
+		self.__setwindowmin()
 		self.redraw()
 		self.window.geometry(f"{self.w}x{self.h}+0+0")
 		self.window.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -50,8 +51,19 @@ class Window:
 		self.__draw()
 		self.pswdattack.attackAlgoW.config(state="readonly")
 		self.pswdattack.attackTypeW.config(state="readonly")
-		self.window.geometry(f"+{sc_width//2-self.w//2}+{sc_height//2-self.h//2}")
+		self.window.geometry(f"+{sc_width//2-self.w//2}+{(sc_height//2-self.h//2)-10}")
 		self.update()
+
+	def __setwindowmin(self):
+		if self.language[0].lower() == "english":
+			self.window.wm_minsize(840,610)
+			self.w, self.h = 840, 610
+		elif self.language[0].lower() == "francais":
+			self.window.wm_minsize(1000,610)
+			self.w, self.h = 1000, 610
+		elif self.language[0].lower() == "عربية":
+			self.window.wm_minsize(760,610)
+			self.w, self.h = 760, 610
 
 	def __wsetup(self, commands_list, types_list, S):
 		#set up password attacker gui
@@ -96,7 +108,6 @@ class Window:
 		tk.Grid.columnconfigure(self.window, 1, weight=1)
 		tk.Grid.columnconfigure(self.window, 2, weight=1)
 		tk.Grid.rowconfigure(self.window, 0, weight=1)
-
 		self.pswdattack.frame.grid(row=0, column=0, columnspan=1, sticky="nesw")
 		self.zipattack.frame.grid(row=0, column=1, columnspan=1, sticky="nwse")
 		self.rarattack.frame.grid(row=0, column=2, columnspan=1, sticky="nwse")
@@ -434,4 +445,4 @@ if __name__ == "__main__":
 	elif check_cli():
 		Cli("cracking actions v0.8", commands_list, available_types)
 	else:
-		Window(840,622,"cracking actions v0.8","555555", commands_list, available_types, language)
+		Window("cracking actions v0.8","555555", commands_list, available_types, language)

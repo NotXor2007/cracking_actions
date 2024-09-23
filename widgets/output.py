@@ -7,7 +7,7 @@ class OutputTerm(Widgets):
 	def __init__(self, win, window):
 		Widgets.__init__(self, window)
 		self.language = win.language
-		self.frame = tk.LabelFrame(self.window,borderwidth=4,text=self.language[44],relief="groove")
+		self.frame = tk.LabelFrame(self.window,borderwidth=4,text=self.language[44],relief="sunken")
 		self.notebook = ttk.Notebook(self.frame)
 		self.pswdtab = ttk.Frame(self.notebook)
 		self.ziptab = ttk.Frame(self.notebook)
