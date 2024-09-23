@@ -1,9 +1,11 @@
 import os
 import hashlib
-import zipfile, rarfile
+import zipfile, rarfile, zipfile_deflate64
 from const import*
 from itertools import product
 from colorama import Fore
+
+def getcompression_method(): pass
 
 #start contains cracking alghoritms
 class Start:

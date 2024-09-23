@@ -157,7 +157,7 @@ class Window:
 		about_window.configure(bg=windowc)
 		about_window.iconbitmap(icon)
 		about_window.title(self.language[11])
-		tk.Label(about_window, text="cracking actions v0.8",
+		tk.Label(about_window, text="cracking actions v0.9",
 			background=windowc,foreground="#ffff88", font="Times 25 bold").pack()
 		tk.Label(about_window, text=self.language[12],
 			background=windowc,foreground="#AABBFF", font="Helvetica 13 bold").pack()
@@ -400,7 +400,7 @@ class Cli:
 			print(Fore.WHITE + "unknown command!")
 
 	def __on_closing(self):
-		result = messagebox.askokcancel("Are you sure?", "Do you want to close cracking actions v0.8")
+		result = messagebox.askokcancel("Are you sure?", "Do you want to close cracking actions v0.9")
 		if result:
 			sys.exit(0)
 		else:
@@ -441,8 +441,8 @@ if __name__ == "__main__":
 	else:
 		language = cfghandler.readcfg() #TODO:take car of return exceptions
 	if check_man():
-		Manual("cracking actions v0.8", commands_list, available_types)
+		Manual("cracking actions v0.9", commands_list, available_types)
 	elif check_cli():
-		Cli("cracking actions v0.8", commands_list, available_types)
+		Cli("cracking actions v0.9", commands_list, available_types)
 	else:
-		Window("cracking actions v0.8","555555", commands_list, available_types, language)
+		Window("cracking actions v0.9","555555", commands_list, available_types, language)
