@@ -2,6 +2,7 @@ import string
 import rarfile
 import ctypes
 import platform
+import logging
 
 if platform.system().lower() == "windows":
 	rarfile.UNRAR_TOOL = ".\\core\\unrar.exe"

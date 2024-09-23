@@ -1,11 +1,19 @@
-import os
+import os,sys
 import hashlib
 import zipfile, rarfile, zipfile_deflate64
 from const import*
 from itertools import product
 from colorama import Fore
 
-def getcompression_method(): pass
+def getcompression_method(file):
+	method_dict = {0:"None",8:"Deflate",9:"deflate64",12:"Bzip2",14:"Lzma",98:"Ppmd"}
+	try:
+		with zipfile.ZipFile(file, "r") as zfile:
+			for zip_info in zfile.infolist():
+				method = zip_info.compress_type
+		return method_dict[method]
+	except Exception as e:
+		print(e)
 
 #start contains cracking alghoritms
 class Start:
@@ -131,6 +139,7 @@ class Start:
 		Start.STOPPSWD = True
 
 	def attackZip(self, file, output, length_key, option, cli=False):
+		print(getcompression_method(file))
 		result = 0
 		if option == None and cli:
 			Start.STOPZIP = True
