@@ -1,4 +1,4 @@
-# cracking-actions ![Static Badge](https://img.shields.io/badge/cracking--actions%20alpha%200.8-red) ![GitHub Downloads (specific asset, latest release)]
+# cracking-actions ![Static Badge](https://img.shields.io/badge/cracking--actions%20alpha%200.8-red)
 ### cracking-actions is an open source software that allows you to crack passwords, files, etc... also it's available on windows and linux
 ## requirements:
 #### windows 7 or later
