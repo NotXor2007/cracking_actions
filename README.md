@@ -1,4 +1,4 @@
-# cracking-actions
+# cracking-actions ![Static Badge](https://img.shields.io/badge/cracking--actions%20alpha%200.8-red)
 ### cracking-actions is an open source software that allows you to crack passwords, files, etc... also it's available on windows and linux
 ## requirements:
 #### windows 7 or later
@@ -28,7 +28,7 @@ navigate to the core directory and then type in console
 ## To Do
 - [ ] adding to zip cracker support to Deflate64, PPMd compression methods
 - [ ] adding AES-256 encryption method support
-- [ ] add language support in console
+- [ ] add language support to console
 - [ ] adding website enumeration tool
 - [ ] adding wifi cracker tool
 
