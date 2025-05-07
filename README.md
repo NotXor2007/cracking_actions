@@ -6,7 +6,7 @@
 ## Installation guide:
 #### you can install a binary release from github or by visiting sourceforge or mediafire.
 #### you will need 7zip or winrar or any program capable of extracting zip file to extract it
-#### finally run cracking-actions alpha 0.8 executable file
+#### finally run cracking-actions executable file
 ## Building from source:
 clone the repository
 `git clone https://github.com/NotXor2007/cracking_actions.git`
