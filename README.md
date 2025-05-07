@@ -41,4 +41,5 @@ navigate to the core directory and then type in console
 - [x] adding gui interface
 - [x] adding hash password cracker
 - [x] adding zip file cracker
+### ⚠️ for educational purposes only!
 ### ©2023-2025 preprocessed NotXor2007.All rights reserved.
