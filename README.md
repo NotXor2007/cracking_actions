@@ -18,7 +18,7 @@ clone the repository
 here is how to use the virtual environment on windows
 `.\venv\scripts\activate.bat`
 #### here is how to do it on linux
-#### and you need also to compile the AutoCreaotr.bas which is found in <u>core</u> directory using fbc.exe, so you need to install FreeBasic compiler finally to get AutoCreator executable file
+#### and you need also to compile the AutoCreator.bas which is found in <u>core</u> directory using fbc.exe, so you need to install FreeBasic compiler finally to get AutoCreator executable file
 ### here is how to do that
 navigate to the core directory and then type in console
 `fbc AutoCreator.bas`
