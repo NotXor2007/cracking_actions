@@ -13,7 +13,7 @@ def getcompression_method(file):
 				method = zip_info.compress_type
 		return method_dict[method]
 	except Exception as e:
-		print(e)
+		print("Error",e)
 
 #start contains cracking alghoritms
 class Start:
@@ -139,7 +139,6 @@ class Start:
 		Start.STOPPSWD = True
 
 	def attackZip(self, file, output, length_key, option, cli=False):
-		print(getcompression_method(file))
 		result = 0
 		if option == None and cli:
 			Start.STOPZIP = True
