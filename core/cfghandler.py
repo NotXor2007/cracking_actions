@@ -1,5 +1,5 @@
 import os
-import logging
+from const import AutoCreator
 
 def readcfg():
 	try:
@@ -24,3 +24,7 @@ def writecfg(data: list):
 			settings.writelines(data)
 	except Exception as e:
 		return -1
+
+def createcfg():
+	subp = __import__("subprocess")
+	subp.run([AutoCreator, "--settings"], shell = True)

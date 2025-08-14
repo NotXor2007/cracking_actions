@@ -4,6 +4,9 @@ from const import*
 from core import cfghandler
 from supercls import Widgets
 from tkinter import colorchooser
+from win32ui import MessageBox
+from win32con import*
+import sys
 
 class Settings(Widgets):
 
@@ -27,7 +30,6 @@ class Settings(Widgets):
 		self.settings_window = tk.Toplevel(self.win.window)
 		self.settings_window.wm_attributes("-topmost", True)
 		self.settings_window.wm_attributes("-alpha", 1)
-		#self.settings_window.resizable(False, False)
 		self.settings_window.geometry("600x400")
 		self.settings_window.iconbitmap(icon)
 		self.settings_window.title(self.win.language[14])
@@ -44,13 +46,22 @@ class Settings(Widgets):
 	def __get_selection(self):
 		return self.language_selector.get()
 
+	def __restart(self):
+		if MessageBox("you have to restart cracking-actions v0.9 for the effects to take actions","Acknowledgement!" , MB_YESNO | MB_ICONWARNING) == 6:
+			os = __import__("os")
+			os.system(".\\cracking_actions alpha 0.9.py")
+			sys.exit(0)
+
 	def __apply(self):
-		if self.__get_selection() == self.win.language[16]:
+		if self.__get_selection() == self.win.language[16] and 1:
 			cfghandler.writecfg(["LANGUAGE=.\lang\english.lang"])
-		elif self.__get_selection() == self.win.language[17]:
+			self.__restart()
+		elif self.__get_selection() == self.win.language[17] and 1:
 			cfghandler.writecfg(["LANGUAGE=.\lang\\french.lang"])
-		elif self.__get_selection() == self.win.language[18]:
+			self.__restart()
+		elif self.__get_selection() == self.win.language[18] and 1:
 			cfghandler.writecfg(["LANGUAGE=.\lang\\arabic.lang"])
+			self.__restart()
 
 	def __applybtn(self):
 		self.apply = tk.Button(self.apply_frame, text = self.win.language[20], command = self.__apply)

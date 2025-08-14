@@ -22,7 +22,7 @@ from widgets.shell import Shell
 from man import Manual
 from core import cfghandler
 
-#f"" not supported on windows xp------
+#f""is not supported on windows xp------
 
 class Window:
 
@@ -435,11 +435,13 @@ if __name__ == "__main__":
 		MessageBox("failed to run because you aren't on a 64-bit machine","Exit with Failure",MB_OK|MB_ICONERROR)
 		sys.exit(-1)
 	if not os.path.exists(settingsfile):
-		subp = __import__("subprocess")
-		subp.run([AutoCreator, "--settings"], shell = True)
+		cfghandler.createcfg()
 		language = cfghandler.readcfg()
 	else:
-		language = cfghandler.readcfg() #TODO:take car of return exceptions
+		language = cfghandler.readcfg() #TODO:take care of return exceptions
+		if language == -1:
+			cfghandler.createcfg()
+			language = cfghandler.readcfg()
 	if check_man():
 		Manual("cracking actions v0.9", commands_list, available_types)
 	elif check_cli():
