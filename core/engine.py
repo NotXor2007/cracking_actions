@@ -1,6 +1,6 @@
 import os,sys
 import hashlib
-import zipfile, rarfile, zipfile_deflate64
+import zipfile, zipfile_deflate64, zipfile_ppmd, rarfile
 from const import*
 from itertools import product
 from colorama import Fore
@@ -140,6 +140,8 @@ class Start:
 
 	def attackZip(self, file, output, length_key, option, cli=False):
 		result = 0
+		if getcompression_method(file) == "Ppmd":
+                        __import__("pyzipper") #TODO
 		if option == None and cli:
 			Start.STOPZIP = True
 			print("Warning:wrong command")

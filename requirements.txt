@@ -6,8 +6,10 @@ packaging==24.1
 pefile==2024.8.26
 pyinstaller==6.10.0
 pyinstaller-hooks-contrib==2024.8
+pyppmd==1.1.0
 pywin32==310
 pywin32-ctypes==0.2.3
 rarfile==4.2
 zipfile-deflate64==0.2.0
+zipfile-ppmd==0.0.3.3
 zipp==3.20.2
