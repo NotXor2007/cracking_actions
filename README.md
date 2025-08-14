@@ -30,7 +30,7 @@ navigate to the core directory and then type in console
 - [ ] add support to multiprocessing to speed up cracking process
 - [ ] add to zip cracker support to Deflate64, PPMd compression methods
 - [ ] add AES-256 encryption method support
-- [ ] transition the core to a native compiler language (FreeBasic)
+- [ ] transition the core to a native compiled language (FreeBasic)
 - [ ] add language support to console
 - [ ] add website enumeration tool
 - [ ] add wifi cracker tool
