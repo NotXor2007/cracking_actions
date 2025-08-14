@@ -28,19 +28,21 @@ navigate to the core directory and then type in console
 #### after this you should get a dist directory where the exe should, simply now copy the lang and the icon and the core directories to the dist dir and leave in the core dir AutoCreator executable and copy to it an external file which is unrar.exe you can get it from the binary release
 ## To Do
 - [ ] add support to multiprocessing to speed up cracking process
-- [ ] adding to zip cracker support to Deflate64, PPMd compression methods
-- [ ] adding AES-256 encryption method support
+- [ ] add to zip cracker support to Deflate64, PPMd compression methods
+- [ ] add AES-256 encryption method support
+- [ ] transition the core to a native compiler language (FreeBasic)
 - [ ] add language support to console
-- [ ] adding website enumeration tool
-- [ ] adding wifi cracker tool
+- [ ] add website enumeration tool
+- [ ] add wifi cracker tool
 
 ## Done
 - [x] adding support for wordlist
 - [x] adding settings menu
 - [x] adding rar cracker
-- [x] compile for linux and windows
+- [x] build for windows
 - [x] adding gui interface
 - [x] adding hash password cracker
 - [x] adding zip file cracker
+### Note: the linux build will become accessible from version 1
 ### ⚠️ for educational purposes only!
 ### ©2023-2025 preprocessed NotXor2007.All rights reserved.
