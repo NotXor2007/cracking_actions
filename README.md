@@ -23,7 +23,7 @@ here is how to use the virtual environment on windows
 navigate to the core directory and then type in console
 `fbc AutoCreator.bas`
 ### Note:of course you need to add fbc to path or simply write the full path to fbc
-#### and finally you can build the project by typing thz following in the console in the repo directory
+#### and finally you can build the project by typing the following in the console in the repo directory
 `pyinstaller --onefile --icon <icon-path> <'cracking-actions.py' file path>`
 #### after this you should get a dist directory where the exe should, simply now copy the lang and the icon and the core directories to the dist dir and leave in the core dir AutoCreator executable and copy to it an external file which is unrar.exe you can get it from the binary release
 ## To Do
