@@ -45,6 +45,6 @@ navigate to the core directory and then type in console
 - [x] gui interface was added
 - [x] hash password cracker was added
 - [x] zip file cracker was added
-### Note: the linux build will become accessible from version 1
+### Note: the linux build is coming soon!
 ### ⚠️ for educational purposes only!
 ### ©2023-2025 preprocessed NotXor2007.All rights reserved.
