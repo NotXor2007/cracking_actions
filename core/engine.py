@@ -19,14 +19,17 @@ def iterate(fn, symbols:str, length:int, start:int, load:list=[-1,], data:str=''
 	if load[0] != -1 and len(load) == length+iterdepth:
 		start = load[iterdepth]
 	for symboli in range(start, len(symbols)):
-		if length == 1: fn(data+symbols[symboli])
-		else: iterate(fn, symbols, length-1, start, load, data+symbols[symboli], iterdepth)
+		if length == 1:
+                        if( fn(data+symbols[symboli]) ): return True
+		elif ( iterate(fn, symbols, length-1, start, load, data+symbols[symboli], iterdepth) ): return True
 		if load[0] != -1 and len(load) == length+iterdepth: load[iterdepth] = 0
+	return False
 
 def gen(fn, stlength, maxlength, load_lst=[-1,]):
 	if stlength >= 1:
 		for length in range(stlength,maxlength+1,1):
-			iterate(fn, "abcdefghijklmn", length, 0, load=load_lst)
+			if( iterate(fn, "abcdefghijklmn", length, 0, load=load_lst) ): return True
+	return False
 
 #start contains cracking alghoritms
 class Start:
@@ -125,16 +128,16 @@ class Start:
 			Start.STOPPSWD = True
 			return False
 		def test(key):
-			if Start.STOPPSWD: return
+			if Start.STOPPSWD: return True
 			new_key = key.encode()
 			self.result = self.show_check(hash_type,new_key,hashed_key,key)
 			self.__printHash(self.result[0],key,self.result[1],hashed_key,cli)
 			if not cli:
 				self.win.redraw()
 				self.win.Aupdate()
-			if self.result[0] == 1: Start.STOPPSWD = True;return
+			if self.result[0] == 1: Start.STOPPSWD = True;return True
 		length_key = int(length_key.strip())
-		gen(test, 1, length_key)
+		if( gen(test, 1, length_key) ): return
 		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
 		else: print(Fore.WHITE + "key not found!")
 		Start.STOPPSWD = True
@@ -152,7 +155,7 @@ class Start:
 			return False
 		def test(key):
 			result = 0
-			if Start.STOPZIP: return
+			if Start.STOPZIP: return True
 			try:
 				f = zipfile.ZipFile(file)
 				self.__printcompressed(self.win.out.zipout, key, file, cli)
@@ -169,9 +172,10 @@ class Start:
 				else: print("Warning:incorrect file name or path!")
 				pass #this is crucial
 				#exit if key was found
-			if result == 1: Start.STOPZIP = True;return
+			if result == 1: Start.STOPZIP = True;return True
+			return False
 		length_key = int(length_key.strip())
-		gen(test, 1, length_key)
+		if( gen(test, 1, length_key) ): return
 		if not cli: self.win.out.zipout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPZIP = True
@@ -260,7 +264,7 @@ class Start:
 			return False
 		def test(key):
 			result = 0
-			if Start.STOPRAR: return
+			if Start.STOPRAR: return True
 			try:
 				f = rarfile.RarFile(file)
 				self.__printcompressed(self.win.out.rarout, key, file, cli)
@@ -276,9 +280,10 @@ class Start:
 				if not cli: self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
 				else: print("Warning:incorrect file name or path!");return
 			#exit if key was found
-			if result == 1: Start.STOPRAR = True;return
+			if result == 1: Start.STOPRAR = True;return True
+			return False
 		length_key = int(length_key.strip())
-		gen(test, 1, length_key)
+		if( gen(test, 1, length_key) ): return
 		if not cli: self.win.out.rarout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPRAR = True
