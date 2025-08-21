@@ -27,6 +27,7 @@ navigate to the core directory and then type in console
 `pyinstaller --onefile --icon <icon-path> <'cracking-actions.py' file path>`
 #### after this you should get a dist directory where the exe should, simply now copy the lang and the icon and the core directories to the dist dir and leave in the core dir AutoCreator executable and copy to it an external file which is unrar.exe you can get it from the binary release
 ## To Do
+- [ ] add support for saving progress and loading it later
 - [ ] add support to multiprocessing to speed up cracking process
 - [ ] add to zip cracker support to PPMd compression method
 - [ ] add AES-256 encryption method support
@@ -44,6 +45,6 @@ navigate to the core directory and then type in console
 - [x] gui interface was added
 - [x] hash password cracker was added
 - [x] zip file cracker was added
-### Note: the linux build will become accessible from version 1
+### Note: the linux build is coming soon!
 ### ⚠️ for educational purposes only!
 ### ©2023-2025 preprocessed NotXor2007.All rights reserved.
