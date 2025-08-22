@@ -25,10 +25,10 @@ def iterate(fn, symbols:str, length:int, start:int, load:list=[-1,], data:str=''
 		if load[0] != -1 and len(load) == length+iterdepth: load[iterdepth] = 0
 	return False
 
-def gen(fn, stlength, maxlength, load_lst=[-1,]):
+def gen(fn, symbols, stlength, maxlength, load_lst=[-1,]):
 	if stlength >= 1:
 		for length in range(stlength,maxlength+1,1):
-			if( iterate(fn, "abcdefghijklmn", length, 0, load=load_lst) ): return True
+			if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
 	return False
 
 #start contains cracking alghoritms
@@ -137,7 +137,7 @@ class Start:
 				self.win.Aupdate()
 			if self.result[0] == 1: Start.STOPPSWD = True;return True
 		length_key = int(length_key.strip())
-		if( gen(test, 1, length_key) ): return
+		if( gen(test, option, 1, length_key) ): return
 		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
 		else: print(Fore.WHITE + "key not found!")
 		Start.STOPPSWD = True
