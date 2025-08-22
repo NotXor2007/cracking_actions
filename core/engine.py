@@ -11,8 +11,7 @@ def getcompression_method(file):
 			for zip_info in zfile.infolist():
 				method = zip_info.compress_type
 		return method_dict[method]
-	except Exception as e:
-		print("Error",e)
+	except Exception as e: pass
 
 def iterate(fn, symbols:str, length:int, start:int, load:list=[-1,], data:str='', iterdepth:int=-1):
 	iterdepth += 1
@@ -20,14 +19,17 @@ def iterate(fn, symbols:str, length:int, start:int, load:list=[-1,], data:str=''
 		start = load[iterdepth]
 	for symboli in range(start, len(symbols)):
 		if length == 1:
-                        if( fn(data+symbols[symboli]) ): return True
+			if( fn(data+symbols[symboli]) ): return True
 		elif ( iterate(fn, symbols, length-1, start, load, data+symbols[symboli], iterdepth) ): return True
 		if load[0] != -1 and len(load) == length+iterdepth: load[iterdepth] = 0
 	return False
 
 def gen(fn, symbols, stlength, maxlength, load_lst=[-1,]):
-	if stlength >= 1:
+	if stlength >= 1 and load_lst[0] == -1:
 		for length in range(stlength,maxlength+1,1):
+			if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
+	elif load_lst[0] != -1:
+		for length in range(len(load_lst),maxlength+1,1):
 			if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
 	return False
 
@@ -108,7 +110,7 @@ class Start:
 			print(f"the file path is {file}")
 			print(f"the current key is {key}")
 
-	def attackHash(self, hash_type, hashed_key, length_key, option, cli=False):
+	def attackHash(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
 		if option == None and cli:
 			Start.STOPPSWD = True
 			print(Fore.WHITE + "Warning:wrong command")
@@ -137,12 +139,12 @@ class Start:
 				self.win.Aupdate()
 			if self.result[0] == 1: Start.STOPPSWD = True;return True
 		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key) ): return
+		if( gen(test, option, 1, length_key, load_lst = load_lst) ): return
 		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
 		else: print(Fore.WHITE + "key not found!")
 		Start.STOPPSWD = True
 
-	def attackZip(self, file, output, length_key, option, cli=False):
+	def attackZip(self, file, output, length_key, option, load_lst=[-1,], cli=False):
 		if getcompression_method(file) == "Ppmd": pass #TODO
 		if option == None and cli:
 			Start.STOPZIP = True
@@ -175,7 +177,7 @@ class Start:
 			if result == 1: Start.STOPZIP = True;return True
 			return False
 		length_key = int(length_key.strip())
-		if( gen(test, 1, length_key) ): return
+		if( gen(test, option, 1, length_key, load_lst = load_lst) ): return
 		if not cli: self.win.out.zipout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPZIP = True
@@ -250,7 +252,7 @@ class Start:
 					continue
 			Start.STOPRAR = True
 
-	def attackRar(self, file, output, length_key, option, cli=False):
+	def attackRar(self, file, output, length_key, option, load_lst=[-1,], cli=False):
 		if option == None and cli:
 			Start.STOPRAR = True
 			print("Warning:wrong command")
@@ -283,7 +285,7 @@ class Start:
 			if result == 1: Start.STOPRAR = True;return True
 			return False
 		length_key = int(length_key.strip())
-		if( gen(test, 1, length_key) ): return
+		if( gen(test, option, 1, length_key, load_lst = load_lst) ): return
 		if not cli: self.win.out.rarout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPRAR = True

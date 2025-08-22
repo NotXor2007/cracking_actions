@@ -53,7 +53,8 @@ class Window:
 		self.pswdattack.attackTypeW.config(state="readonly")
 		self.window.geometry(f"+{sc_width//2-self.w//2}+{(sc_height//2-self.h//2)-10}")
 		self.update()
-
+		
+        #setup window smallest size
 	def __setwindowmin(self):
 		if self.language[0].lower() == "english":
 			self.window.wm_minsize(840,610)
@@ -65,6 +66,7 @@ class Window:
 			self.window.wm_minsize(760,610)
 			self.w, self.h = 760, 610
 
+        #setup widgets
 	def __wsetup(self, commands_list, types_list, S):
 		#set up password attacker gui
 		self.pswdattack = AttackPswd(self, self.window)
@@ -98,7 +100,8 @@ class Window:
 		self.zipattack.pack()
 		self.rarattack.pack()
 		self.out.pack()
-	#basically makes the shell works
+		
+	#basically makes the shell work
 	def __shell_enabler(self):
 		shell = Shell(self)
 
@@ -112,15 +115,18 @@ class Window:
 		self.zipattack.frame.grid(row=0, column=1, columnspan=1, sticky="nwse")
 		self.rarattack.frame.grid(row=0, column=2, columnspan=1, sticky="nwse")
 		self.out.frame.grid(row=1, column=0, columnspan=3, sticky="sew")
+
 	#create menu
 	def __menu(self):
 		menu = MenuBar(self, self.window, self.on_closing, self.get_help, 
 			self.pswdatk, self.zipatk, self.raratk, self.load_wlst, self.settings, self.mwin)
 
+        #show close dialog
 	def on_closing(self):
 		if MessageBox(self.language[10], self.language[9], MB_YESNO | MB_ICONQUESTION) == 6:
 			sys.exit(0)
 
+        #show help window
 	def get_help(self):
 		windowc = "#000022"
 		help_window = tk.Toplevel(self.window)
@@ -147,6 +153,7 @@ class Window:
 			scroll.insert(tk.INSERT,cmd+"\n")
 			scroll.tag_add("cmdoptions", str(index+2.0), str(index+2)+".end")
 
+        #show about window
 	def mwin(self):
 		windowc = "#000000"
 		about_window = tk.Toplevel(self.window)
@@ -165,6 +172,7 @@ class Window:
 			background=windowc,foreground="#AABBFF", font="Helvetica 15 bold").pack()
 		tk.Label(about_window, text=cdate,
 			background=windowc,foreground="#AA55AA", font="Times 13 bold").pack()	
+
 	#creating menu events
 	def pswdatk(self):
 		for child in self.zipattack.frame.winfo_children():

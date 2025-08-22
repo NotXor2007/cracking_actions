@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from supercls import Widgets
 from core.engine import*
+from core.loader import Loader
 import threading
 from const import*
 from tkinter import messagebox
@@ -52,11 +53,10 @@ class AttackPswd(Widgets):
 	def __getOption(self):
 		option = self.attackAlgoW.get()
 		for o in zip(commands_list, char_options):
-			if o[0] == option:
-				return o[1]
-			else:
-				continue
+			if o[0] == option: return o[1]
+			else: continue
 
+	#start button event
 	def __start_btn_cmd(self, S):
 		if not Start.STOPPSWD:
 			result = messagebox.showwarning(self.language[31], self.language[32])
@@ -64,20 +64,22 @@ class AttackPswd(Widgets):
 			Start.STOPPSWD = False
 			self.task = threading.Thread(target=S.attackHash, args=(
 				self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
-				self.__getOption()))
+				self.__getOption(), Loader().load(self.window)))
 			self.task.start()
 
+	#stop button event
 	def __stop_btn_cmd(self):
 		Start.STOPPSWD = True
 
+	#create start button
 	def start_btn(self, S):
-		self.stabtn = tk.Button(self.frame,text=self.language[29],
-				command=lambda :self.__start_btn_cmd(S))
+		self.stabtn = tk.Button(self.frame,text=self.language[29],command=lambda:self.__start_btn_cmd(S))
 
+	#create stop button
 	def stop_btn(self):
-		self.stobtn = tk.Button(self.frame,text=self.language[30],
-			command=self.__stop_btn_cmd)
+		self.stobtn = tk.Button(self.frame,text=self.language[30],command=self.__stop_btn_cmd)
 
+	#show widgets
 	def pack(self):
 		#-------------------------------------
 		self.Commandtype.grid(row=0, column=0, sticky="w")

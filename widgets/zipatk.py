@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from supercls import Widgets
 from core.engine import*
+from core.loader import Loader
 import threading
 from const import*
 from tkinter import messagebox
@@ -77,7 +78,7 @@ class AttackZip(Widgets):
 			Start.STOPZIP = False
 			if self.attackAlgoW.get() in commands_list:
 				self.task = threading.Thread(target=S.attackZip, args=(
-					self.file_path,self.file_output,self.lengthkey.get(),self.__getOption()))
+					self.file_path,self.file_output,self.lengthkey.get(),self.__getOption(),Loader().load(self.window)))
 			else:
 				self.task = threading.Thread(target=S.attackZipWlst, args=(
 					self.file_path,self.file_output))

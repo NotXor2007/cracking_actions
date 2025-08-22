@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from supercls import Widgets
 from core.engine import*
+from core.loader import*
 import threading
 from const import*
 from tkinter import messagebox
@@ -78,8 +79,9 @@ class AttackRar(Widgets):
 			Start.STOPRAR = False
 			if self.attackAlgoW.get() in commands_list:
 				self.task = threading.Thread(target=S.attackRar, args=(
-					self.file_path,self.file_output,self.lengthkey.get(),self.__getOption()))
+					self.file_path,self.file_output,self.lengthkey.get(),self.__getOption(),Loader().load(self.window)))
 			else:
+                                #if user selects a wordlist
 				self.task = threading.Thread(target=S.attackRarWlst, args=(
 					self.file_path,self.file_output))
 			self.task.start()
