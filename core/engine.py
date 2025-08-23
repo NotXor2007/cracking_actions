@@ -1,6 +1,7 @@
 import os,sys
 import hashlib
 import zipfile, zipfile_deflate64, zipfile_ppmd, rarfile
+from core.loader import Writer
 from const import*
 from colorama import Fore
 
@@ -26,16 +27,17 @@ def iterate(fn, symbols:str, length:int, start:int, load:list=[-1,], data:str=''
 
 def gen(fn, symbols, stlength, maxlength, load_lst=[-1,]):
 	if stlength >= 1 and load_lst[0] == -1:
-		for length in range(stlength,maxlength+1,1):
+		for length in range(stlength,maxlength+1,1): 
 			if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
 	elif load_lst[0] != -1:
 		for length in range(len(load_lst),maxlength+1,1):
-			if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
+                        if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
 	return False
 
 #start contains cracking alghoritms
 class Start:
 	STOPPSWD, STOPZIP, STOPRAR = True, True, True
+	DATA = ""
 	def __init__(self, win):
 		self.win = win
 
@@ -130,7 +132,7 @@ class Start:
 			Start.STOPPSWD = True
 			return False
 		def test(key):
-			if Start.STOPPSWD: return True
+			if Start.STOPPSWD: Start.DATA = key;return True
 			new_key = key.encode()
 			self.result = self.show_check(hash_type,new_key,hashed_key,key)
 			self.__printHash(self.result[0],key,self.result[1],hashed_key,cli)
@@ -139,7 +141,8 @@ class Start:
 				self.win.Aupdate()
 			if self.result[0] == 1: Start.STOPPSWD = True;return True
 		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key, load_lst = load_lst) ): return
+		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
+                        Writer().write(Start.DATA, option);return
 		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
 		else: print(Fore.WHITE + "key not found!")
 		Start.STOPPSWD = True
@@ -157,7 +160,7 @@ class Start:
 			return False
 		def test(key):
 			result = 0
-			if Start.STOPZIP: return True
+			if Start.STOPZIP: Start.DATA = key;return True
 			try:
 				f = zipfile.ZipFile(file)
 				self.__printcompressed(self.win.out.zipout, key, file, cli)
@@ -177,7 +180,8 @@ class Start:
 			if result == 1: Start.STOPZIP = True;return True
 			return False
 		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key, load_lst = load_lst) ): return
+		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
+                        Writer().write(Start.DATA, option);return
 		if not cli: self.win.out.zipout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPZIP = True
@@ -266,7 +270,7 @@ class Start:
 			return False
 		def test(key):
 			result = 0
-			if Start.STOPRAR: return True
+			if Start.STOPRAR: Start.DATA = key;return True
 			try:
 				f = rarfile.RarFile(file)
 				self.__printcompressed(self.win.out.rarout, key, file, cli)
@@ -285,7 +289,8 @@ class Start:
 			if result == 1: Start.STOPRAR = True;return True
 			return False
 		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key, load_lst = load_lst) ): return
+		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
+                        Writer().write(Start.DATA, option);return
 		if not cli: self.win.out.rarout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPRAR = True

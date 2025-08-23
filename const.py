@@ -18,24 +18,36 @@ cdate = "©2023-2025 preprocessed NotXor2007.All rights reserved.20/09/2024"
 
 available_types = ["md5","sha1","sha224","sha384","sha3_224","sha3_512","sha3_384","sha3_256","sha256","sha512","blake2b","blake2s"]
 
-char_options = (string.digits,string.ascii_lowercase,string.ascii_uppercase
-,string.ascii_lowercase+string.digits,string.ascii_uppercase+string.digits
-,string.ascii_letters,string.ascii_letters+string.digits,string.punctuation
-,string.punctuation+string.digits,string.punctuation+string.ascii_lowercase
-,string.punctuation+string.ascii_uppercase
-,string.punctuation+string.ascii_lowercase+string.digits
-,string.punctuation+string.ascii_uppercase+string.digits
-,string.punctuation+string.ascii_letters
-,string.punctuation+string.ascii_letters+string.digits
-,string.digits,string.ascii_lowercase,string.ascii_uppercase
-,string.ascii_lowercase+string.digits,string.ascii_uppercase+string.digits
-,string.ascii_letters,string.ascii_letters+string.digits,string.punctuation
-,string.punctuation+string.digits+" ",string.punctuation+string.ascii_lowercase+" "
-,string.punctuation+string.ascii_uppercase+" "
-,string.punctuation+string.ascii_lowercase+string.digits+" "
-,string.punctuation+string.ascii_uppercase+string.digits+" "
-,string.punctuation+string.ascii_letters+" "
-,string.punctuation+string.ascii_letters+string.digits+" ")
+char_options = (
+        string.digits
+        ,string.ascii_lowercase
+        ,string.ascii_uppercase
+        ,string.ascii_lowercase + string.digits
+        ,string.ascii_uppercase + string.digits
+        ,string.ascii_letters
+        ,string.ascii_letters + string.digits
+        ,string.punctuation
+        ,string.punctuation+string.digits
+        ,string.punctuation+string.ascii_lowercase
+        ,string.punctuation+string.ascii_uppercase
+        ,string.punctuation+string.ascii_lowercase+string.digits
+        ,string.punctuation+string.ascii_uppercase+string.digits
+        ,string.punctuation+string.ascii_letters
+        ,string.punctuation+string.ascii_letters+string.digits
+        ,string.digits,string.ascii_lowercase
+        ,string.ascii_uppercase
+        ,string.ascii_lowercase+string.digits
+        ,string.ascii_uppercase+string.digits
+        ,string.ascii_letters
+        ,string.ascii_letters+string.digits
+        ,string.punctuation
+        ,string.punctuation+string.digits+" "
+        ,string.punctuation+string.ascii_lowercase+" "
+        ,string.punctuation+string.ascii_uppercase+" "
+        ,string.punctuation+string.ascii_lowercase+string.digits+" "
+        ,string.punctuation+string.ascii_uppercase+string.digits+" "
+        ,string.punctuation+string.ascii_letters+" "
+        ,string.punctuation+string.ascii_letters+string.digits+" ")
 
 commands_list = ["start -n","start -cl", "start -cu", "start -cl -n", 
 "start -cu -n", "start -cu -cl", "start -cu -cl -n", "start -s", "start -s -n",
