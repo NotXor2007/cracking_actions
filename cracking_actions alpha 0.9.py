@@ -203,19 +203,18 @@ class Window:
 		self.rarattack.attackAlgoW.config(state="readonly")	
 
 	def load_wlst(self):
-		file_path = filedialog.askopenfilename(title=self.language[50],
+		file = filedialog.askopenfile(title=self.language[50],
 			filetypes=[(self.language[51], ".txt")])
-		if file_path != "":
-			with open(file_path, "r", encoding="utf-8") as wlist:
-				self.wlist = wlist.readlines()
+		if file != None:
+			self.wlist = file.readlines()
 			for word in self.wlist:
 				self.wlist[self.wlist.index(word)] = word.rstrip("\n")
-			commands_list.append(file_path)
+			commands_list.append(file.name)
 			self.pswdattack.attackAlgoW["values"]= commands_list
 			self.zipattack.attackAlgoW["values"]= commands_list
 			self.rarattack.attackAlgoW["values"]= commands_list
 			commands_list.remove(commands_list[-1])
-			self.out.console.insert(tk.END, "%s %s\n"%(self.language[52],file_path))
+			self.out.console.insert(tk.END, "%s %s\n"%(self.language[52],file.name))
 
 	def settings(self):
 		self.wsettings.show_settings()

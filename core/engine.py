@@ -38,6 +38,7 @@ def gen(fn, symbols, stlength, maxlength, load_lst=[-1,]):
 class Start:
 	STOPPSWD, STOPZIP, STOPRAR = True, True, True
 	DATA = ""
+	SUCCESS = False
 	def __init__(self, win):
 		self.win = win
 
@@ -139,10 +140,13 @@ class Start:
 			if not cli:
 				self.win.redraw()
 				self.win.Aupdate()
-			if self.result[0] == 1: Start.STOPPSWD = True;return True
+			if self.result[0] == 1: Start.STOPPSWD = True;Start.SUCCESS = True
+			return False
 		length_key = int(length_key.strip())
 		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
-                        Writer().write(Start.DATA, option);return
+                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
+                        else: Start.SUCCESS = False
+                        return 
 		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
 		else: print(Fore.WHITE + "key not found!")
 		Start.STOPPSWD = True
@@ -177,11 +181,13 @@ class Start:
 				else: print("Warning:incorrect file name or path!")
 				pass #this is crucial
 				#exit if key was found
-			if result == 1: Start.STOPZIP = True;return True
+			if result == 1: Start.STOPZIP = True
 			return False
 		length_key = int(length_key.strip())
 		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
-                        Writer().write(Start.DATA, option);return
+                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
+                        else: Start.SUCCESS = False
+                        return
 		if not cli: self.win.out.zipout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPZIP = True
@@ -286,11 +292,13 @@ class Start:
 				if not cli: self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
 				else: print("Warning:incorrect file name or path!");return
 			#exit if key was found
-			if result == 1: Start.STOPRAR = True;return True
+			if result == 1: Start.STOPRAR = True
 			return False
 		length_key = int(length_key.strip())
 		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
-                        Writer().write(Start.DATA, option);return
+                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
+                        else: Start.SUCCESS = False
+                        return
 		if not cli: self.win.out.rarout.insert("end","key not found!\n")
 		else: print("key not found!")
 		Start.STOPRAR = True
