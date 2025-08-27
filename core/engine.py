@@ -113,6 +113,45 @@ class Start:
 			print(f"the file path is {file}")
 			print(f"the current key is {key}")
 
+	def attackHashWlst(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
+		if option == None and cli:
+			Start.STOPPSWD = True
+			print(Fore.WHITE + "Warning:wrong command")
+			return
+		if hash_type not in available_types and cli:
+			Start.STOPPSWD = True
+			print(Fore.WHITE + "Warning:wrong Algorithm")
+			return
+		if len(hashed_key.strip()) == 0:
+			if not cli: self.win.out.pswdout.insert("end","Warning:wrong hash key\n")
+			else: print(Fore.WHITE + "Warning:wrong hash key")
+			Start.STOPPSWD = True
+			return False
+		elif not length_key.strip().isnumeric():
+			if not cli: self.win.out.pswdout.insert("end","Warning:Mgl must be a number!\n")
+			else: print(Fore.WHITE + "Warning:Mgl must be a number!")
+			Start.STOPPSWD = True
+			return False
+		def test(key):
+			if Start.STOPPSWD: Start.DATA = key;return True
+			new_key = key.encode()
+			self.result = self.show_check(hash_type,new_key,hashed_key,key)
+			self.__printHash(self.result[0],key,self.result[1],hashed_key,cli)
+			if not cli:
+				self.win.redraw()
+				self.win.Aupdate()
+			if self.result[0] == 1: Start.STOPPSWD = True;Start.SUCCESS = True
+			return False
+		length_key = int(length_key.strip())
+		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
+                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
+                        else: Start.SUCCESS = False
+                        return 
+		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
+		else: print(Fore.WHITE + "key not found!")
+		Start.STOPPSWD = True
+
+
 	def attackHash(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
 		if option == None and cli:
 			Start.STOPPSWD = True

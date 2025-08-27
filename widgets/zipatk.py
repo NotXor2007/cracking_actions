@@ -71,6 +71,7 @@ class AttackZip(Widgets):
 			else:
 				continue
 
+        #start button event
 	def __start_btn_cmd(self, S):
 		if not Start.STOPZIP:
 			result = messagebox.showwarning(self.language[31], self.language[32])
