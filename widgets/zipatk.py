@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from supercls import Widgets
 from core.engine import*
-from core.loader import Loader
+from core.capshandler import Loader
 import threading
 from const import*
 from tkinter import messagebox

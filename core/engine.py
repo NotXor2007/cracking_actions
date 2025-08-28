@@ -1,7 +1,7 @@
 import os,sys
 import hashlib
 import zipfile, zipfile_deflate64, zipfile_ppmd, rarfile
-from core.loader import Writer
+from core.capshandler import Writer
 from const import*
 from colorama import Fore
 
@@ -189,7 +189,7 @@ class Start:
 					f.close()
 					if not cli: self.win.out.zipout.insert("end",f"key found:{key}\n")
 					else: print(f"key found:{key}")
-					Start.STOPZIP = True
+					Start.STOPZIP = True;Start.SUCCESS = True
 				except RuntimeError as e: return False
 			except Exception as e:
 				if not cli: self.win.out.zipout.insert("end","Warning:incorrect file name or path!\n")
@@ -238,7 +238,7 @@ class Start:
                                         f.close()
                                         if not cli: self.win.out.rarout.insert("end",f"key found:{key}\n")
                                         else: print(f"key found:{key}")
-                                        Start.STOPRAR = True
+                                        Start.STOPRAR = True;Start.SUCCESS = True
                                 except RuntimeError as e: return False
                         except Exception as e:
                                 if not cli: self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
