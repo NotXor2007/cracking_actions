@@ -31,7 +31,7 @@ def gen(fn, symbols, stlength, maxlength, load_lst=[-1,]):
 			if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
 	elif load_lst[0] != -1:
 		for length in range(len(load_lst),maxlength+1,1):
-                        if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
+			if( iterate(fn, symbols, length, 0, load=load_lst) ): return True
 	return False
 
 #start contains cracking alghoritms
@@ -113,7 +113,21 @@ class Start:
 			print(f"the file path is {file}")
 			print(f"the current key is {key}")
 
+	def checkHash(self, hash_type, hashed_key, cli):
+		def test(key):
+			if Start.STOPPSWD: Start.DATA = key;return True
+			new_key = key.encode()
+			self.result = self.show_check(hash_type,new_key,hashed_key,key)
+			self.__printHash(self.result[0],key,self.result[1],hashed_key,cli)
+			if not cli:
+				self.win.redraw()
+				self.win.Aupdate()
+			if self.result[0] == 1: Start.STOPPSWD = True;Start.SUCCESS = True
+			return False
+		return test
+
 	def attackHashWlst(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
+		#security checks
 		if option == None and cli:
 			Start.STOPPSWD = True
 			print(Fore.WHITE + "Warning:wrong command")
@@ -127,30 +141,12 @@ class Start:
 			else: print(Fore.WHITE + "Warning:wrong hash key")
 			Start.STOPPSWD = True
 			return False
-		elif not length_key.strip().isnumeric():
-			if not cli: self.win.out.pswdout.insert("end","Warning:Mgl must be a number!\n")
-			else: print(Fore.WHITE + "Warning:Mgl must be a number!")
-			Start.STOPPSWD = True
-			return False
-		def test(key):
-			if Start.STOPPSWD: Start.DATA = key;return True
-			new_key = key.encode()
-			self.result = self.show_check(hash_type,new_key,hashed_key,key)
-			self.__printHash(self.result[0],key,self.result[1],hashed_key,cli)
-			if not cli:
-				self.win.redraw()
-				self.win.Aupdate()
-			if self.result[0] == 1: Start.STOPPSWD = True;Start.SUCCESS = True
-			return False
-		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
-                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
-                        else: Start.SUCCESS = False
-                        return 
-		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
-		else: print(Fore.WHITE + "key not found!")
+		#main
+		if self.win.wlist != None: #if a wordlist is selected
+			for key in self.win.wlist:
+				check = self.checkHash(hash_type, hashed_key, cli)(key)
+				if check: return
 		Start.STOPPSWD = True
-
 
 	def attackHash(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
 		if option == None and cli:
@@ -171,38 +167,18 @@ class Start:
 			else: print(Fore.WHITE + "Warning:Mgl must be a number!")
 			Start.STOPPSWD = True
 			return False
-		def test(key):
-			if Start.STOPPSWD: Start.DATA = key;return True
-			new_key = key.encode()
-			self.result = self.show_check(hash_type,new_key,hashed_key,key)
-			self.__printHash(self.result[0],key,self.result[1],hashed_key,cli)
-			if not cli:
-				self.win.redraw()
-				self.win.Aupdate()
-			if self.result[0] == 1: Start.STOPPSWD = True;Start.SUCCESS = True
-			return False
+		
 		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
-                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
-                        else: Start.SUCCESS = False
-                        return 
-		if not cli: self.win.out.pswdout.insert("end","key not found!\n")
-		else: print(Fore.WHITE + "key not found!")
+		if( gen(self.checkHash(hash_type, hashed_key, cli), option, 1, length_key, load_lst = load_lst) ):
+			if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
+			else: Start.SUCCESS = False
+		else:
+			if not cli: self.win.out.pswdout.insert("end","key not found!\n")
+			else: print(Fore.WHITE + "key not found!")
 		Start.STOPPSWD = True
 
-	def attackZip(self, file, output, length_key, option, load_lst=[-1,], cli=False):
-		if getcompression_method(file) == "Ppmd": pass #TODO
-		if option == None and cli:
-			Start.STOPZIP = True
-			print("Warning:wrong command")
-			return
-		elif not length_key.strip().isnumeric():
-			if not cli: self.win.out.zipout.insert("end","Warning:Mgl must be a number!\n")
-			else: print("Warning:Mgl must be a number!")
-			Start.STOPZIP = True
-			return False
+	def checkZip(self, file, output, cli):
 		def test(key):
-			result = 0
 			if Start.STOPZIP: Start.DATA = key;return True
 			try:
 				f = zipfile.ZipFile(file)
@@ -213,99 +189,74 @@ class Start:
 					f.close()
 					if not cli: self.win.out.zipout.insert("end",f"key found:{key}\n")
 					else: print(f"key found:{key}")
-					result = 1
-				except RuntimeError as e: pass
+					Start.STOPZIP = True
+				except RuntimeError as e: return False
 			except Exception as e:
 				if not cli: self.win.out.zipout.insert("end","Warning:incorrect file name or path!\n")
 				else: print("Warning:incorrect file name or path!")
-				pass #this is crucial
-				#exit if key was found
-			if result == 1: Start.STOPZIP = True
 			return False
+		return test
+
+	def attackZip(self, file, output, length_key, option, load_lst=[-1,], cli=False):
+		if getcompression_method(file) == "Ppmd": pass #TODO
+		#security checks
+		if option == None and cli:
+			Start.STOPZIP = True
+			print("Warning:wrong command")
+			return False #??????????????
+		elif not length_key.strip().isnumeric():
+			if not cli: self.win.out.zipout.insert("end","Warning:Mgl must be a number!\n")
+			else: print("Warning:Mgl must be a number!")
+			Start.STOPZIP = True
+			return False #??????????????
+		#main
 		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
-                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
-                        else: Start.SUCCESS = False
-                        return
-		if not cli: self.win.out.zipout.insert("end","key not found!\n")
-		else: print("key not found!")
+		if( gen(self.checkZip(file, output, cli), option, 1, length_key, load_lst = load_lst) ):
+			if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
+			else: Start.SUCCESS = False
+		else:
+			if not cli: self.win.out.zipout.insert("end","key not found!\n")
+			else: print("key not found!")
 		Start.STOPZIP = True
 
-	def checkZip(self, key, file, output, cli, result):
-		try:
-			f = zipfile.ZipFile(file)
-			self.__printcompressed(self.win.out.zipout, key, file, cli)
-			try:
-				f.setpassword(pwd=key.encode())
-				f.extractall(output)
-				f.close()
-				if not cli: self.win.out.zipout.insert("end",f"key found:{key}\n")
-				else: print(f"key found:{key}")
-				return 0 #key found
-			except RuntimeError as e:
-				return 1 #key not found
-		except Exception as e:
-			if not cli: self.win.out.zipout.insert("end","Warning:incorrect file name or path!\n")
-			else: print("Warning:incorrect file name or path!")
-			return -1 #this is crucial
-
 	def attackZipWlst(self, file, output, cli=False):
-		result = 0
-		Start.STOPZIP = False
-		if self.win.wlist != None:
+		if self.win.wlist != None: #if a wordlist is selected
 			for key in self.win.wlist:
-				info = self.checkZip(key, file, output, cli, result)
-				if info == 0:
-					Start.STOPZIP = True
-					return
-				elif info == 1:
-					continue
-				elif info == -1:
-					Start.STOPZIP = True
-			Start.STOPZIP = True
+				check = self.checkZip(file, output, cli)(key)
+				if check: return
+		Start.STOPZIP = True
 
-	def checkRar(self, key, file, output, cli, result):
-		try:
-			f = rarfile.RarFile(file)
-			self.__printcompressed(self.win.out.rarout, key, file, cli)
-			try:
-				f.setpassword(pwd=key)
-				f.extractall(output)
-				f.close()
-				if not cli:
-					self.win.out.rarout.insert("end",f"key found:{key}\n")
-				else:
-					print(f"key found:{key}")
-				return 0 #key found
-			except RuntimeError as e:
-				return 1 #key not found
-		except Exception as e:
-			if not cli:
-				self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
-			else:
-				print("Warning:incorrect file name or path!")
-			return -1 #this is crucial
+	def checkRar(self, file, output, cli):
+                def test(key):
+                        if Start.STOPRAR: Start.DATA = key;return True
+                        try:
+                                f = rarfile.RarFile(file)
+                                self.__printcompressed(self.win.out.rarout, key, file, cli)
+                                try:
+                                        f.setpassword(pwd=key.encode())
+                                        f.extractall(output)
+                                        f.close()
+                                        if not cli: self.win.out.rarout.insert("end",f"key found:{key}\n")
+                                        else: print(f"key found:{key}")
+                                        Start.STOPRAR = True
+                                except RuntimeError as e: return False
+                        except Exception as e:
+                                if not cli: self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
+                                else: print("Warning:incorrect file name or path!");return
+                        return False
+                return test
 
 	def attackRarWlst(self, file, output, cli=False):
-		result = 0
-		Start.STOPRAR = False
 		if self.win.wlist != None:
 			for key in self.win.wlist:
-				info = self.checkRar(key, file, output, cli, result)
-				if info == 0:
-					Start.STOPRAR = True
-					return
-				elif info == 1:
-					continue
-				elif info == -1:
-					continue
-			Start.STOPRAR = True
+				check = self.checkRar(file, output, cli)(key)
+		Start.STOPRAR = True
 
 	def attackRar(self, file, output, length_key, option, load_lst=[-1,], cli=False):
 		if option == None and cli:
 			Start.STOPRAR = True
 			print("Warning:wrong command")
-			return
+			return False
 		elif not length_key.strip().isnumeric():
 			if not cli:
 				self.win.out.zipout.insert("end","Warning:Mgl must be a number!\n")
@@ -313,31 +264,12 @@ class Start:
 				print("Warning:Mgl must be a number!")
 			Start.STOPRAR = True
 			return False
-		def test(key):
-			result = 0
-			if Start.STOPRAR: Start.DATA = key;return True
-			try:
-				f = rarfile.RarFile(file)
-				self.__printcompressed(self.win.out.rarout, key, file, cli)
-				try:
-					f.setpassword(pwd=key.encode())
-					f.extractall(output)
-					f.close()
-					if not cli: self.win.out.rarout.insert("end",f"key found:{key}\n")
-					else: print(f"key found:{key}")
-					result = 1
-				except RuntimeError as e: pass
-			except Exception as e:
-				if not cli: self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
-				else: print("Warning:incorrect file name or path!");return
-			#exit if key was found
-			if result == 1: Start.STOPRAR = True
-			return False
+		
 		length_key = int(length_key.strip())
-		if( gen(test, option, 1, length_key, load_lst = load_lst) ):
-                        if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
-                        else: Start.SUCCESS = False
-                        return
-		if not cli: self.win.out.rarout.insert("end","key not found!\n")
-		else: print("key not found!")
+		if( gen(self.checkRar(file, output, cli), option, 1, length_key, load_lst = load_lst) ):
+			if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress
+			else: Start.SUCCESS = False
+		else:
+                        if not cli: self.win.out.rarout.insert("end","key not found!\n")
+                        else: print("key not found!")
 		Start.STOPRAR = True

@@ -62,15 +62,15 @@ class AttackPswd(Widgets):
 			result = messagebox.showwarning(self.language[31], self.language[32])
 		else:
 			Start.STOPPSWD = False
-                        if self.attackAlgoW.get() in commands_list:
-                                self.task = threading.Thread(target=S.attackHash, args=(
-                                        self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
-                                        self.__getOption(), Loader().load(self.window)))
-                        else:
-                                self.task = threading.Thread(target=S.attackHashWlst, args=(
-                                        self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
-                                        self.__getOption(), Loader().load(self.window)))
-                                
+			if self.attackAlgoW.get() in commands_list:
+				self.task = threading.Thread(target=S.attackHash, args=(
+					self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
+					self.__getOption(), Loader().load(self.window)))
+			else:
+				self.task = threading.Thread(target=S.attackHashWlst, args=(
+					self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
+					self.__getOption(), Loader().load(self.window)))
+				
 			self.task.start()
 
 	#stop button event
