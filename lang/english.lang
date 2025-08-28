@@ -3,7 +3,7 @@ exit
 help
 About
 attackers
-enable password attacker
+enable hash attacker
 enable zip attacker
 enable rar attacker
 Settings
@@ -20,7 +20,7 @@ Arabic
 apply changes
 Apply
 cracking actions v0.9-help
-attack password
+attack hash
 Command:
 Algorithm:
 Hash:
@@ -43,7 +43,7 @@ choose output
 zipfile
 rarfile
 output
-password attacker output
+hash attacker output
 zip attacker output
 rar attacker output
 shell

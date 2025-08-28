@@ -3,7 +3,7 @@ quitter
 aide
 Propos
 attaqueur
-activer l'attaqueur de mot-de-passe
+activer l'attaqueur de hash
 activer l'attaqueur de zip
 activer l'attaqueur de rar
 parametre
@@ -20,7 +20,7 @@ Arabe
 appliquer les changements
 Appliquer
 cracking actions v0.9-aide
-attaquer mot-de-passe
+attaquer hash
 Commande:
 Algorithme:
 Hash:
@@ -43,7 +43,7 @@ choisir une sortie
 fichier zip
 fichier rar
 sortie
-sortie de l'attaqueur de mot-de-passe
+sortie de l'attaqueur de hash
 sortie de l'attaqueur de zip
 sortie de l'attaqueur de rar
 shell

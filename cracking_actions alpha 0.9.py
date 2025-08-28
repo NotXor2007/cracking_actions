@@ -14,7 +14,7 @@ from const import*
 from core.engine import*
 from widgets.settings import Settings
 from widgets.menu import MenuBar
-from widgets.pswdatk import AttackPswd 
+from widgets.hashatk import AttackPswd 
 from widgets.zipatk import AttackZip
 from widgets.raratk import AttackRar
 from widgets.output import OutputTerm
