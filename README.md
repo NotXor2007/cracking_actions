@@ -1,6 +1,8 @@
 # cracking-actions 0.9 Alpha
 ### zip cracker supports ![Static Badge](https://img.shields.io/badge/Deflate-blue) ![Static Badge](https://img.shields.io/badge/Deflate64-blue) ![Static Badge](https://img.shields.io/badge/Bzip2-blue) ![Static Badge](https://img.shields.io/badge/LZMA-blue) 
 ### cracking-actions is an open source software for cracking passwords, files, etc...
+## Hello Contributor
+#### here is how to contribute: https://opensource.com/life/16/3/contributor-guidelines-template-and-tips
 ## requirements:
 #### windows 7 or later
 ## Installation guide:
