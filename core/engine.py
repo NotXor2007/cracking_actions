@@ -143,12 +143,19 @@ class Start:
 			return False
 		#main
 		if self.win.wlist != None: #if a wordlist is selected
-			for key in self.win.wlist:
-				check = self.checkHash(hash_type, hashed_key, cli)(key)
-				if check: return
+                        if load_lst[0] != -1:
+                                #TODO
+                                for key in range(load_lst[0]-1, len(self.win.wlist), 1):
+                                        check = self.checkHash(hash_type, hashed_key, cli)(self.win.wlist[key])
+                                        if check: return
+                        else:
+                                for key in range(0, len(self.win.wlist), 1):
+                                        check = self.checkHash(hash_type, hashed_key, cli)(self.win.wlist[key])
+                                        if check: return
 		Start.STOPPSWD = True
 
 	def attackHash(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
+                #security checks
 		if option == None and cli:
 			Start.STOPPSWD = True
 			print(Fore.WHITE + "Warning:wrong command")
@@ -167,7 +174,7 @@ class Start:
 			else: print(Fore.WHITE + "Warning:Mgl must be a number!")
 			Start.STOPPSWD = True
 			return False
-		
+		#main
 		length_key = int(length_key.strip())
 		if( gen(self.checkHash(hash_type, hashed_key, cli), option, 1, length_key, load_lst = load_lst) ):
 			if not Start.SUCCESS: Writer().write(Start.DATA, option) #save progress

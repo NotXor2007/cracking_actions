@@ -69,7 +69,7 @@ class AttackPswd(Widgets):
 			else:
 				self.task = threading.Thread(target=S.attackHashWlst, args=(
 					self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
-					self.__getOption(), Loader().load(self.window)))
+					self.__getOption(), Loader().load(self.window, procedural=False)))
 				
 			self.task.start()
 
