@@ -126,16 +126,12 @@ class Start:
 			return False
 		return test
 
-	def attackHashWlst(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
+	def attackHashWlst(self, hash_type, hashed_key, load_lst=[-1,], cli=False):
 		#security checks
-		if option == None and cli:
-			Start.STOPPSWD = True
-			print(Fore.WHITE + "Warning:wrong command")
-			return
 		if hash_type not in available_types and cli:
 			Start.STOPPSWD = True
 			print(Fore.WHITE + "Warning:wrong Algorithm")
-			return
+			return False
 		if len(hashed_key.strip()) == 0:
 			if not cli: self.win.out.pswdout.insert("end","Warning:wrong hash key\n")
 			else: print(Fore.WHITE + "Warning:wrong hash key")
@@ -206,12 +202,12 @@ class Start:
 		if option == None and cli:
 			Start.STOPZIP = True
 			print("Warning:wrong command")
-			return False #??????????????
+			return False
 		elif not length_key.strip().isnumeric():
 			if not cli: self.win.out.zipout.insert("end","Warning:Mgl must be a number!\n")
 			else: print("Warning:Mgl must be a number!")
 			Start.STOPZIP = True
-			return False #??????????????
+			return False
 		#main
 		length_key = int(length_key.strip())
 		if( gen(self.checkZip(file, output, cli), option, 1, length_key, load_lst = load_lst) ):
@@ -222,12 +218,14 @@ class Start:
 			else: print("key not found!")
 		Start.STOPZIP = True
 
-	def attackZipWlst(self, file, output, cli=False):
-		if self.win.wlist != None: #if a wordlist is selected
-			for key in self.win.wlist:
-				check = self.checkZip(file, output, cli)(key)
-				if check: return
-		Start.STOPZIP = True
+	def attackZipWlst(self, file, output, load_lst=[-1,], cli=False):
+                if self.win.wlist != None: #if a wordlist is selected
+                        startIndex = 0
+                        if load_lst[0] != -1: startIndex = load_lst[0]-1
+                        for key in range(startIndex, len(self.win.wlist), 1):
+                                check = self.checkZip(file, output, cli)(self.win.wlist[key])
+                                if check: return
+                Start.STOPZIP = True
 
 	def checkRar(self, file, output, cli):
                 def test(key):
@@ -242,18 +240,21 @@ class Start:
                                         if not cli: self.win.out.rarout.insert("end",f"key found:{key}\n")
                                         else: print(f"key found:{key}")
                                         Start.STOPRAR = True;Start.SUCCESS = True
-                                except RuntimeError as e: return False
+                                except Exception as e: return False
                         except Exception as e:
                                 if not cli: self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
                                 else: print("Warning:incorrect file name or path!");return
                         return False
                 return test
 
-	def attackRarWlst(self, file, output, cli=False):
-		if self.win.wlist != None:
-			for key in self.win.wlist:
-				check = self.checkRar(file, output, cli)(key)
-		Start.STOPRAR = True
+	def attackRarWlst(self, file, output, load_lst=[-1,], cli=False):
+                if self.win.wlist != None: #if a wordlist is selected
+                        startIndex = 0
+                        if load_lst[0] != -1: startIndex = load_lst[0]-1
+                        for key in range(startIndex, len(self.win.wlist), 1):
+                                check = self.checkRar(file, output, cli)(self.win.wlist[key])
+                                if check: return
+                Start.STOPRAR = True
 
 	def attackRar(self, file, output, length_key, option, load_lst=[-1,], cli=False):
 		if option == None and cli:

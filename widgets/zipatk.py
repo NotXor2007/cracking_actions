@@ -79,10 +79,11 @@ class AttackZip(Widgets):
 			Start.STOPZIP = False
 			if self.attackAlgoW.get() in commands_list:
 				self.task = threading.Thread(target=S.attackZip, args=(
-					self.file_path,self.file_output,self.lengthkey.get(),self.__getOption(),Loader().load(self.window)))
+					self.file_path,self.file_output,
+                                        self.lengthkey.get(),self.__getOption(),Loader().load(self.window)))
 			else:
-				self.task = threading.Thread(target=S.attackZipWlst, args=(
-					self.file_path,self.file_output))
+				self.task = threading.Thread(target=S.attackZipWlst,args=(self.file_path,self.file_output,
+                                                                   Loader().load(self.window,procedural=False)))
 			self.task.start()
 
 	def __stop_btn_cmd(self):

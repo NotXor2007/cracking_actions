@@ -83,7 +83,7 @@ class AttackRar(Widgets):
 			else:
                                 #if user selects a wordlist
 				self.task = threading.Thread(target=S.attackRarWlst, args=(
-					self.file_path,self.file_output))
+					self.file_path,self.file_output,Loader().load(self.window,procedural=False)))
 			self.task.start()
 
 	def __stop_btn_cmd(self):
