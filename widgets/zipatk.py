@@ -82,7 +82,7 @@ class AttackZip(Widgets):
 					self.file_path,self.file_output,
                                         self.lengthkey.get(),self.__getOption(),Loader().load(self.window)))
 			else:
-				self.task = threading.Thread(target=S.attackZipWlst,args=(self.file_path,self.file_output,
+				self.task = threading.Thread(target=S.attackWlst,args=("zip",self.file_path,self.file_output,
                                                                    Loader().load(self.window,procedural=False)))
 			self.task.start()
 

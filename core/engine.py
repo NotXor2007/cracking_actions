@@ -126,26 +126,6 @@ class Start:
 			return False
 		return test
 
-	def attackHashWlst(self, hash_type, hashed_key, load_lst=[-1,], cli=False):
-		#security checks
-		if hash_type not in available_types and cli:
-			Start.STOPPSWD = True
-			print(Fore.WHITE + "Warning:wrong Algorithm")
-			return False
-		if len(hashed_key.strip()) == 0:
-			if not cli: self.win.out.pswdout.insert("end","Warning:wrong hash key\n")
-			else: print(Fore.WHITE + "Warning:wrong hash key")
-			Start.STOPPSWD = True
-			return False
-		#main
-		if self.win.wlist != None: #if a wordlist is selected
-                        startIndex = 0
-                        if load_lst[0] != -1: startIndex = load_lst[0]-1
-                        for key in range(startIndex, len(self.win.wlist), 1):
-                                check = self.checkHash(hash_type, hashed_key, cli)(self.win.wlist[key])
-                                if check: return
-		Start.STOPPSWD = True
-
 	def attackHash(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
                 #security checks
 		if option == None and cli:
@@ -218,12 +198,17 @@ class Start:
 			else: print("key not found!")
 		Start.STOPZIP = True
 
-	def attackZipWlst(self, file, output, load_lst=[-1,], cli=False):
+	def attackWlst(self, attacker:str, file, output, load_lst=[-1,], cli=False):
                 if self.win.wlist != None: #if a wordlist is selected
                         startIndex = 0
                         if load_lst[0] != -1: startIndex = load_lst[0]-1
                         for key in range(startIndex, len(self.win.wlist), 1):
-                                check = self.checkZip(file, output, cli)(self.win.wlist[key])
+                                if attacker == "zip":
+                                        check = self.checkZip(file, output, cli)(self.win.wlist[key])
+                                elif attacker == "rar":
+                                        check = self.checkRar(file, output, cli)(self.win.wlist[key])
+                                elif attacker == "hash":
+                                        check = self.checkHash(file, output, cli)(self.win.wlist[key])
                                 if check: return
                 Start.STOPZIP = True
 
@@ -246,15 +231,6 @@ class Start:
                                 else: print("Warning:incorrect file name or path!");return
                         return False
                 return test
-
-	def attackRarWlst(self, file, output, load_lst=[-1,], cli=False):
-                if self.win.wlist != None: #if a wordlist is selected
-                        startIndex = 0
-                        if load_lst[0] != -1: startIndex = load_lst[0]-1
-                        for key in range(startIndex, len(self.win.wlist), 1):
-                                check = self.checkRar(file, output, cli)(self.win.wlist[key])
-                                if check: return
-                Start.STOPRAR = True
 
 	def attackRar(self, file, output, length_key, option, load_lst=[-1,], cli=False):
 		if option == None and cli:

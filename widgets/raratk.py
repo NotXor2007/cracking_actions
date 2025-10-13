@@ -82,7 +82,7 @@ class AttackRar(Widgets):
 					self.file_path,self.file_output,self.lengthkey.get(),self.__getOption(),Loader().load(self.window)))
 			else:
                                 #if user selects a wordlist
-				self.task = threading.Thread(target=S.attackRarWlst, args=(
+				self.task = threading.Thread(target=S.attackWlst, args=("rar",
 					self.file_path,self.file_output,Loader().load(self.window,procedural=False)))
 			self.task.start()
 

@@ -63,12 +63,10 @@ class AttackPswd(Widgets):
 		else:
 			Start.STOPPSWD = False
 			if self.attackAlgoW.get() in commands_list:
-				self.task = threading.Thread(target=S.attackHash, args=(
-					self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
+				self.task = threading.Thread(target=S.attackHash, args=(self.attackTypeW.get(), self.__getHash(), self.lengthkey.get(), 
 					self.__getOption(), Loader().load(self.window)))
 			else:
-				self.task = threading.Thread(target=S.attackHashWlst, args=(
-					self.attackTypeW.get(), self.__getHash(), 
+				self.task = threading.Thread(target=S.attackWlst, args=("hash",self.attackTypeW.get(), self.__getHash(), 
 					Loader().load(self.window, procedural=False)))
 				
 			self.task.start()
