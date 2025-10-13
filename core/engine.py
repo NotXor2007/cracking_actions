@@ -143,15 +143,11 @@ class Start:
 			return False
 		#main
 		if self.win.wlist != None: #if a wordlist is selected
-                        if load_lst[0] != -1:
-                                #TODO
-                                for key in range(load_lst[0]-1, len(self.win.wlist), 1):
-                                        check = self.checkHash(hash_type, hashed_key, cli)(self.win.wlist[key])
-                                        if check: return
-                        else:
-                                for key in range(0, len(self.win.wlist), 1):
-                                        check = self.checkHash(hash_type, hashed_key, cli)(self.win.wlist[key])
-                                        if check: return
+                        startIndex = 0
+                        if load_lst[0] != -1: startIndex = load_lst[0]-1
+                        for key in range(startIndex, len(self.win.wlist), 1):
+                                check = self.checkHash(hash_type, hashed_key, cli)(self.win.wlist[key])
+                                if check: return
 		Start.STOPPSWD = True
 
 	def attackHash(self, hash_type, hashed_key, length_key, option, load_lst=[-1,], cli=False):
