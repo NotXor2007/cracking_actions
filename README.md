@@ -10,12 +10,11 @@
 #### you will need 7zip or winrar or any program capable of extracting zip file to extract it
 #### finally run cracking-actions executable file
 ## To Do
-- [ ] add support to multiprocessing to speed up cracking process
+1. - [ ] add support for multiprocessing to speed up cracking process
+- [ ] write the core in a compiled language (FreeBasic)
+- [ ] add website enumeration tool
 - [ ] add to zip cracker support to PPMd compression method
 - [ ] add AES-256 encryption method support
-- [ ] write the core in a compiled language (FreeBasic)
-- [ ] add language support to console
-- [ ] add website enumeration tool
 - [ ] add wifi cracker tool
 
 ## Done
