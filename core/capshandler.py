@@ -4,8 +4,9 @@ from win32ui import MessageBox
 from win32con import*
 from tkinter import filedialog
 
+#option is a string of all characters that the attacker uses currently
+
 class Writer:
-    def __init__(self): pass
 
     def __encode(self, data, option):
             ret_str = str()
@@ -15,17 +16,20 @@ class Writer:
             return ret_str[:len(ret_str)-1]
 
     #load progress file
-    def __save_file(self, data, option):
+    def __save_file(self, data, procedural, option):
         file = filedialog.asksaveasfile(title="Save Progress File As",
                                         filetypes=[("CAPS file", ".caps")],defaultextension=".caps")
         if file != None:
-            file.write(self.__encode(data, option))
+            if not procedural:
+                file.write(self.__encode(data, option))
+            else:
+                file.write(data)
             file.close()
 
     #load progress
-    def write(self, data, option):
+    def write(self, data, procedural, option):
         if MessageBox("Do you want to save the cracking session?", "cracking-actions 0.9 alpha", MB_YESNO | MB_ICONQUESTION) == 6:
-            return self.__save_file(data, option)
+            return self.__save_file(data, procedural, option)
         return [-1, ]
 
 class Loader:
