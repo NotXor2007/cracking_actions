@@ -3,7 +3,6 @@ import hashlib
 import zipfile, zipfile_deflate64, zipfile_ppmd, rarfile
 from core.capshandler import Writer
 from const import*
-from colorama import Fore
 
 def getcompression_method(file):
 	method_dict = {0:"None",8:"Deflate",9:"deflate64",12:"Bzip2",14:"Lzma",98:"Ppmd"}
@@ -116,7 +115,6 @@ class Start:
 			return False
 		elif not length_key.strip().isnumeric():
 			if not cli: self.win.out.pswdout.insert("end","Warning:Mgl must be a number!\n")
-			else: print(Fore.WHITE + "Warning:Mgl must be a number!")
 			Start.STOPPSWD = True
 			return False
 		#main
@@ -194,7 +192,6 @@ class Start:
                                 except Exception as e: return False
                         except Exception as e:
                                 if not cli: self.win.out.rarout.insert("end","Warning:incorrect file name or path!\n")
-                                else: print("Warning:incorrect file name or path!");return
                         return False
                 return test
 

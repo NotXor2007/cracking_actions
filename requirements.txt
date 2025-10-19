@@ -1,11 +1,8 @@
 altgraph==0.17.4
-colorama==0.4.6
 importlib-metadata==8.5.0
 libarchive-c==5.1
 packaging==24.1
 pefile==2024.8.26
-pyinstaller==6.10.0
-pyinstaller-hooks-contrib==2024.8
 pyppmd==1.1.0
 pywin32==310
 pywin32-ctypes==0.2.3
