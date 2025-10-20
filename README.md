@@ -2,7 +2,7 @@
 ### zip cracker supports ![Static Badge](https://img.shields.io/badge/Deflate-blue) ![Static Badge](https://img.shields.io/badge/Deflate64-blue) ![Static Badge](https://img.shields.io/badge/Bzip2-blue) ![Static Badge](https://img.shields.io/badge/LZMA-blue) 
 ### cracking-actions is an open source software for cracking passwords, files, etc...
 
-<img width="871" height="690" alt="soft" src="https://github.com/user-attachments/assets/c47c0608-c7fc-45c7-b76d-463b52854604" />
+<img width="753" height="617" alt="soft" src="https://github.com/user-attachments/assets/c47c0608-c7fc-45c7-b76d-463b52854604" />
 
 ## Hello Contributor
 #### here is how to contribute: https://opensource.com/life/16/3/contributor-guidelines-template-and-tips
